@@ -1,0 +1,27 @@
+{
+  "name": "tensorloom-workspace",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npx bun run --cwd frontend dev\" \"npx bun run --cwd backend dev\"",
+    "frontend": "npx bun run --cwd frontend",
+    "backend": "npx bun run --cwd backend",
+    "prepare": "husky"
+  },
+  "devDependencies": {
+    "bun": "^1.1.20",
+    "concurrently": "^8.2.2",
+    "husky": "^9.0.11",
+    "lint-staged": "^15.2.2",
+    "prettier": "^3.2.5"
+  },
+  "lint-staged": {
+    "**/*.(ts|tsx|js|jsx|json|css|md)": "prettier --write"
+  },
+  "dependencies": {
+    "lucide-react": "^1.27.0"
+  }
+}
