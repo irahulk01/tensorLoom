@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { Plus_Jakarta_Sans, JetBrains_Mono } from 'next/font/google';
 import './globals.css';
-import { LenisProvider } from '../components/ui/LenisProvider';
+import { LenisProvider } from '@/components/common/LenisProvider';
 
 const sansFont = Plus_Jakarta_Sans({
   variable: '--font-sans',

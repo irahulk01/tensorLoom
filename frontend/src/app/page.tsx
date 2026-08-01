@@ -1,18 +1,18 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { fetchContent } from '../lib/api';
+import { fetchContent } from '@/lib/api';
 
-import { Navbar } from '../components/Navbar/Navbar';
-import { Hero } from '../components/Hero/Hero';
-import { Beliefs } from '../components/Beliefs/Beliefs';
-import { Services } from '../components/Services/Services';
-import { Thinking } from '../components/Thinking/Thinking';
-import { Work } from '../components/Work/Work';
-import { TechStack } from '../components/TechStack/TechStack';
-import Contact from '../components/Contact';
-import { Footer } from '../components/Footer/Footer';
-import { CurtainLoader } from '../components/Animations/CurtainLoader';
+import { Navbar } from '@/features/navbar/components/Navbar';
+import { Hero } from '@/features/hero/components/Hero';
+import { Beliefs } from '@/features/beliefs/components/Beliefs';
+import { Services } from '@/features/services/components/Services';
+import { Thinking } from '@/features/thinking/components/Thinking';
+import { Work } from '@/features/work/components/Work';
+import { TechStack } from '@/features/tech-stack/components/TechStack';
+import Contact from '@/features/contact/components/Contact';
+import { Footer } from '@/features/footer/components/Footer';
+import { CurtainLoader } from '@/components/animations/CurtainLoader';
 
 const languages = [
   { code: 'en', label: 'English', flag: '🇺🇸' },

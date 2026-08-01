@@ -293,7 +293,11 @@ const capabilitiesData = [
   },
 ];
 
-export function Services() {
+interface ServicesProps {
+  servicesContent?: any;
+}
+
+export function Services({ servicesContent }: ServicesProps) {
   const container = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [activeTab, setActiveTab] = useState('Websites');
