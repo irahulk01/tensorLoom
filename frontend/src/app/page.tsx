@@ -10,6 +10,9 @@ import { Services } from '@/features/services/components/Services';
 import { Thinking } from '@/features/thinking/components/Thinking';
 import { Work } from '@/features/work/components/Work';
 import { TechStack } from '@/features/tech-stack/components/TechStack';
+import { WhyChooseUs } from '@/features/why-choose-us/components/WhyChooseUs';
+import { Testimonials } from '@/features/clients/components/Testimonials';
+import { TrustedBrands } from '@/features/clients/components/TrustedBrands';
 import Contact from '@/features/contact/components/Contact';
 import { Footer } from '@/features/footer/components/Footer';
 import { CurtainLoader } from '@/components/animations/CurtainLoader';
@@ -81,6 +84,15 @@ export default function Home() {
 
             {/* 6. Technology */}
             <TechStack />
+
+            {/* Trusted Clients Marquee */}
+            <TrustedBrands />
+
+            {/* Testimonials */}
+            <Testimonials />
+
+            {/* Why Choose Us */}
+            <WhyChooseUs />
 
             {/* 7. Conversation */}
             <section id="contact" className="w-full relative z-20 bg-transparent">

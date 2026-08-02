@@ -1,7 +1,8 @@
 @import 'tailwindcss';
 
 @theme {
-  --font-sans: var(--font-sans), 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-sans), 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-heading), 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-mono), 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
 
   --color-bg-dark: #000000; /* Pure black for maximum contrast */
@@ -21,10 +22,20 @@
 body {
   background-color: var(--background);
   color: var(--foreground);
-  font-family: var(--font-sans);
+  font-family: var(--font-sans), 'Inter', sans-serif;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.font-heading {
+  font-family: var(--font-heading), 'Plus Jakarta Sans', sans-serif;
 }
 
 /* Base resets for Lenis */
@@ -120,4 +131,247 @@ html.lenis body {
 
 .hover-scale-image:hover {
   transform: scale(1.03);
+}
+
+/* Glass classes (Default/Dark) */
+.glass-depth {
+  background: rgba(10, 10, 10, 0.6);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+.glass-rim-light {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+.glass-panel-light {
+  background: rgba(15, 15, 15, 0.85);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+/* Light Mode Overrides */
+.light-mode {
+  --background: #fbfbfd;
+  --foreground: #1d1d1f;
+
+  background-color: var(--background);
+  color: var(--foreground);
+
+  /* Glass classes (Light Mode) */
+  .glass-depth {
+    background: rgba(255, 255, 255, 0.6) !important;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+  .glass-rim-light {
+    border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  }
+  .glass-panel-light {
+    background: rgba(255, 255, 255, 0.85) !important;
+    border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  }
+
+  /* Override hardcoded text-white to be dark */
+  .text-white {
+    color: #121314 !important;
+  }
+
+  /* Override text-white with opacity to be dark in light mode */
+  .text-white\/10,
+  .text-white\/20,
+  .text-white\/25,
+  .text-white\/30,
+  .text-white\/35 {
+    color: rgba(18, 19, 20, 0.45) !important;
+  }
+  .text-white\/40,
+  .text-white\/50,
+  .text-white\/60,
+  .text-white\/70,
+  .text-white\/75 {
+    color: rgba(18, 19, 20, 0.7) !important;
+  }
+  .text-white\/80,
+  .text-white\/90,
+  .text-white\/95 {
+    color: rgba(18, 19, 20, 0.95) !important;
+  }
+
+  /* Override text-gray-300 / text-zinc-400 / text-gray-500 to be medium gray */
+  .text-gray-300,
+  .text-gray-400,
+  .text-zinc-400,
+  .text-zinc-500,
+  .text-gray-500 {
+    color: #55565a !important;
+  }
+
+  /* Adjust primary/subtle colors */
+  .text-cyan-400,
+  .text-cyan-300 {
+    color: #0d9488 !important; /* Rich Teal for good contrast in light mode */
+  }
+
+  .text-green-400,
+  .text-green-500,
+  .text-green-600,
+  .text-emerald-400,
+  .text-emerald-500 {
+    color: #c89a43 !important;
+  }
+
+  .text-violet-400 {
+    color: #7c3aed !important;
+  }
+
+  /* Override borders */
+  .border-white\/5,
+  .border-white\/8,
+  .border-white\/10,
+  .border-white\/15,
+  .border-white\/20,
+  .border-white\/30,
+  .border-cyan-500\/30 {
+    border-color: rgba(0, 0, 0, 0.1) !important;
+  }
+
+  /* Override background colors */
+  .bg-black {
+    background-color: #ffffff !important;
+  }
+
+  .bg-\[\#0a0a0a\],
+  .bg-zinc-900,
+  .bg-\[\#111111\] {
+    background-color: #f3f4f6 !important;
+  }
+
+  .bg-white\/5,
+  .bg-white\/10,
+  .bg-cyan-500\/10,
+  .bg-white\/15 {
+    background-color: rgba(0, 0, 0, 0.03) !important;
+  }
+
+  .bg-black\/15,
+  .bg-black\/25,
+  .bg-black\/30,
+  .bg-black\/80,
+  .bg-black\/90 {
+    background-color: rgba(255, 255, 255, 0.75) !important;
+    backdrop-filter: blur(12px);
+  }
+
+  /* Hero section preserves dark backdrop blur overlay & video visibility in both light & dark mode */
+  .hero-section {
+    background-color: #000000 !important;
+  }
+
+  .hero-section .bg-black\/60 {
+    background-color: rgba(0, 0, 0, 0.6) !important;
+  }
+
+  .hero-section .text-white {
+    color: #ffffff !important;
+  }
+
+  .hero-section .text-gray-400 {
+    color: #9ca3af !important;
+  }
+
+  .hero-section .bg-white\/5 {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+  }
+
+  .hero-section .border-white\/10 {
+    border-color: rgba(255, 255, 255, 0.1) !important;
+  }
+
+  /* Lenis, overlays, noise */
+  .bg-noise {
+    opacity: 0.015 !important;
+  }
+
+  /* Glow lighting effects */
+  .bg-white\/5.blur-\[100px\],
+  .bg-violet-600\/10,
+  .bg-cyan-600\/10 {
+    background-color: rgba(13, 148, 136, 0.02) !important;
+  }
+
+  /* Flagship surface hover effects */
+  .flagship-surface {
+    background: rgba(255, 255, 255, 0.7) !important;
+    border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  }
+
+  .flagship-surface:hover {
+    background: rgba(255, 255, 255, 0.9) !important;
+    border-color: rgba(0, 0, 0, 0.15) !important;
+  }
+
+  /* Input fields */
+  input,
+  textarea {
+    color: #121314 !important;
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    color: #999999 !important;
+  }
+}
+
+/* Infinite Marquee Animation */
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes marquee-reverse {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 28s linear infinite;
+}
+
+.animate-marquee-reverse {
+  display: flex;
+  width: max-content;
+  animation: marquee-reverse 22s linear infinite;
+}
+
+.animate-marquee-hover-pause:hover,
+.animate-marquee-hover-pause:hover .animate-marquee,
+.animate-marquee-hover-pause:hover .animate-marquee-reverse {
+  animation-play-state: paused;
+}
+
+/* Brand card glow line */
+.brand-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.brand-card:hover::before {
+  opacity: 1;
 }

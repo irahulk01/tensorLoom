@@ -148,18 +148,22 @@ export function Navbar({ navContent, languages, currentLang, setCurrentLang }: N
             alt="tensorLoom Logo"
             className="w-5 h-5 rounded-md object-cover shadow-sm group-hover:scale-105 transition-transform"
           />
-          <span className="hidden lg:inline font-extrabold text-sm tracking-tight text-white group-hover:text-cyan-400 transition-colors whitespace-nowrap">
-            TENSORLOOM
-          </span>
+          {!isDockedBottom && (
+            <span className="hidden lg:inline font-extrabold text-sm tracking-tight text-white group-hover:text-cyan-400 transition-colors whitespace-nowrap">
+              TENSORLOOM
+            </span>
+          )}
         </a>
 
         {/* Section Navigation Links */}
-        <div className="flex items-center gap-3 sm:gap-6 md:gap-8 text-[11px] sm:text-xs font-medium text-gray-300">
+        <div className="flex items-center gap-3 sm:gap-6 md:gap-8 text-[11px] sm:text-xs font-medium text-gray-300 font-sans">
           {[
-            { href: '#services', label: navContent.services },
-            { href: '#work', label: navContent.work },
-            { href: '#team', label: navContent.team },
-            { href: '#contact', label: navContent.contact },
+            { href: '#', label: navContent?.home || 'Home' },
+            { href: '#services', label: navContent?.services || 'Services' },
+            { href: '#work', label: navContent?.work || 'Our Work' },
+            { href: '#tech-stack', label: navContent?.techStack || 'Tech Stack' },
+            { href: '/blog', label: navContent?.blog || 'Blog' },
+            { href: '#contact', label: navContent?.contact || 'Contact Us' },
           ].map((item) => (
             <a
               key={item.href}

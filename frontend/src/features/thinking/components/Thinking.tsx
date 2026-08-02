@@ -28,7 +28,7 @@ export function Thinking({ thinkingContent }: ThinkingProps) {
             <span className="text-sm font-mono text-gray-500 uppercase tracking-widest mb-6 block">
               {thinkingContent.title}
             </span>
-            <h2 className="text-5xl md:text-7xl font-extrabold tracking-tighter text-white leading-tight">
+            <h2 className="text-5xl md:text-7xl font-extrabold tracking-tighter text-white leading-tight font-heading">
               {thinkingContent.subtitle}
             </h2>
           </div>

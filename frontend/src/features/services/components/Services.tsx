@@ -401,10 +401,10 @@ export function Services({ servicesContent }: ServicesProps) {
 
       <div className="max-w-[1200px] mx-auto px-6 md:px-12 relative z-10">
         <div className="mb-20 flex flex-col md:flex-row md:items-end justify-between gap-8 border-b border-white/10 pb-12">
-          <h2 className="text-5xl md:text-7xl font-extrabold tracking-tighter leading-tight text-white uppercase">
+          <h2 className="text-5xl md:text-7xl font-extrabold tracking-tighter leading-tight text-white uppercase font-heading">
             WHAT WE BUILD
           </h2>
-          <p className="text-lg md:text-xl text-gray-400 font-medium max-w-sm">
+          <p className="text-lg md:text-xl text-gray-400 font-normal max-w-sm font-sans">
             Engineering digital products that solve real business problems.
           </p>
         </div>

@@ -60,7 +60,7 @@ export function Beliefs({ beliefsContent }: BeliefsProps) {
           {beliefsContent.statements.map((statement, sIdx) => (
             <h3
               key={sIdx}
-              className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tighter leading-[1.1] text-white flex flex-wrap gap-x-4"
+              className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tighter leading-[1.1] text-white flex flex-wrap gap-x-4 font-heading"
             >
               {statement.split(' ').map((word, wIdx) => (
                 <span key={`${sIdx}-${wIdx}`} className="belief-word inline-block">

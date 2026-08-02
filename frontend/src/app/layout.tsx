@@ -1,12 +1,18 @@
 import type { Metadata } from 'next';
-import { Plus_Jakarta_Sans, JetBrains_Mono } from 'next/font/google';
+import { Plus_Jakarta_Sans, Inter, JetBrains_Mono } from 'next/font/google';
 import './globals.css';
 import { LenisProvider } from '@/components/common/LenisProvider';
 
-const sansFont = Plus_Jakarta_Sans({
-  variable: '--font-sans',
+const headingFont = Plus_Jakarta_Sans({
+  variable: '--font-heading',
   subsets: ['latin'],
   weight: ['300', '400', '500', '600', '700', '800'],
+});
+
+const bodyFont = Inter({
+  variable: '--font-sans',
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700'],
 });
 
 const monoFont = JetBrains_Mono({
@@ -25,7 +31,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${sansFont.variable} ${monoFont.variable}`}>
+    <html lang="en" className={`${headingFont.variable} ${bodyFont.variable} ${monoFont.variable}`}>
       <body>
         <LenisProvider>{children}</LenisProvider>
       </body>
