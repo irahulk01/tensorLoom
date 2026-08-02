@@ -9,7 +9,7 @@
     "dev": "concurrently \"npx bun run --cwd frontend dev\" \"npx bun run --cwd backend dev\"",
     "frontend": "npx bun run --cwd frontend",
     "backend": "npx bun run --cwd backend",
-    "prepare": "husky"
+    "prepare": "node -e \"if (process.env.NODE_ENV !== 'production' && !process.env.CI) { try { require('child_process').execSync('husky', { stdio: 'inherit' }); } catch (e) {} }\""
   },
   "devDependencies": {
     "bun": "^1.1.20",
