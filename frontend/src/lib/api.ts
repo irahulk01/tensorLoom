@@ -1,11 +1,21 @@
+import { fallbackContentData } from './fallbackData';
+
 const API_BASE = 'http://localhost:3001';
 
 export async function fetchContent(lang: string) {
-  const response = await fetch(`${API_BASE}/api/content?lang=${lang}`);
-  if (!response.ok) {
-    throw new Error(`Failed to fetch content for language: ${lang}`);
+  try {
+    const response = await fetch(`${API_BASE}/api/content?lang=${lang}`);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch content for language: ${lang}`);
+    }
+    return await response.json();
+  } catch (err) {
+    console.warn(
+      `[API] Backend service unreachable at ${API_BASE}. Falling back to local content.`,
+      err,
+    );
+    return fallbackContentData[lang] || fallbackContentData['en'];
   }
-  return response.json();
 }
 
 export async function submitContact(formData: {
