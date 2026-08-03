@@ -179,37 +179,37 @@ export function TechStack() {
     <section
       id="tech-stack"
       ref={containerRef}
-      className="w-full bg-[var(--background)] py-32 md:py-48 relative z-20 border-t border-white/10"
+      className="w-full bg-[var(--background)] py-16 sm:py-24 md:py-36 relative z-20 border-t border-white/10"
     >
-      <div className="max-w-[1200px] mx-auto px-6 md:px-12">
+      <div className="max-w-[1200px] mx-auto px-4 sm:px-6 md:px-12">
         {/* Header */}
-        <div className="mb-20 flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+        <div className="mb-10 sm:mb-16 flex flex-col md:flex-row md:items-end md:justify-between gap-4 sm:gap-6">
           <div>
-            <span className="text-xs font-mono text-cyan-400 uppercase tracking-widest mb-4 block font-semibold">
+            <span className="text-xs font-mono text-cyan-400 uppercase tracking-widest mb-3 block font-semibold">
               Architecture & Stack
             </span>
-            <h2 className="text-4xl md:text-6xl font-extrabold tracking-tighter text-white leading-tight max-w-3xl font-heading">
+            <h2 className="text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tighter text-white leading-tight max-w-3xl font-heading">
               Engineered for performance, built on robust standards.
             </h2>
           </div>
 
           <Link
             href="/stack"
-            className="flex items-center gap-2 px-6 py-3 rounded-full bg-cyan-500 hover:bg-cyan-400 text-black font-extrabold text-xs transition-all duration-300 shadow-[0_0_20px_rgba(6,182,212,0.3)] cursor-pointer font-heading w-fit"
+            className="flex items-center gap-2 px-5 py-2.5 sm:px-6 sm:py-3 rounded-full bg-cyan-500 hover:bg-cyan-400 text-black font-extrabold text-xs transition-all duration-300 shadow-[0_0_20px_rgba(6,182,212,0.3)] cursor-pointer font-heading w-fit shrink-0"
           >
             <span>Explore Full Stack</span>
             <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
 
-        {/* Grid (8 Main Tech Cards + 9th "See More" Card) */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* Responsive Grid/Carousel Container: Carousel starts cleanly at Card 1 (React 19) */}
+        <div className="flex md:grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 max-md:overflow-x-auto max-md:no-scrollbar max-md:snap-x max-md:snap-mandatory max-md:pb-4 max-md:pt-1 max-md:px-2">
           {mainTechnologies.map((tech, idx) => (
             <motion.div
               key={idx}
-              whileHover={{ y: -6, scale: 1.01 }}
+              whileHover={{ y: -4, scale: 1.01 }}
               transition={{ duration: 0.3 }}
-              className="group flagship-surface p-8 rounded-2xl hover:border-cyan-500/40 transition-all duration-300 min-h-[220px] flex flex-col justify-between border border-white/10 shadow-lg hover:shadow-2xl relative overflow-hidden [perspective:800px]"
+              className="group flagship-surface p-6 sm:p-8 rounded-2xl hover:border-cyan-500/40 transition-all duration-300 min-h-[200px] sm:min-h-[220px] max-md:w-[84vw] max-md:shrink-0 max-md:snap-start flex flex-col justify-between border border-white/10 shadow-lg hover:shadow-2xl relative overflow-hidden [perspective:800px]"
             >
               {/* Subtle accent glow behind icon */}
               <div
@@ -219,13 +219,13 @@ export function TechStack() {
 
               {/* Category & 3D Badge Icon */}
               <div className="flex items-center justify-between w-full relative z-10">
-                <span className="text-xs font-mono text-gray-500 uppercase tracking-widest">
+                <span className="text-[11px] sm:text-xs font-mono text-gray-400 uppercase tracking-widest">
                   {tech.category}
                 </span>
 
                 {/* 3D Elevated Badge */}
                 <div
-                  className="w-12 h-12 rounded-2xl flex items-center justify-center border border-white/15 bg-white/5 shadow-[0_10px_20px_rgba(0,0,0,0.3)] transition-transform duration-500 group-hover:rotate-6 group-hover:scale-110"
+                  className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl flex items-center justify-center border border-white/15 bg-white/5 shadow-sm transition-transform duration-500 group-hover:rotate-6 group-hover:scale-110"
                   style={{
                     boxShadow: `0 10px 25px -5px ${tech.glow}`,
                   }}
@@ -235,40 +235,40 @@ export function TechStack() {
               </div>
 
               {/* Name & Description */}
-              <div className="mt-6 relative z-10">
-                <h3 className="text-xl font-bold text-white mb-2 group-hover:text-cyan-400 transition-colors font-heading">
+              <div className="mt-4 sm:mt-6 relative z-10">
+                <h3 className="text-lg sm:text-xl font-bold text-white mb-1.5 sm:mb-2 group-hover:text-cyan-400 transition-colors font-heading">
                   {tech.name}
                 </h3>
-                <p className="text-sm text-gray-400 font-sans leading-relaxed">
+                <p className="text-xs sm:text-sm text-gray-400 font-sans leading-relaxed">
                   {tech.description}
                 </p>
               </div>
             </motion.div>
           ))}
 
-          {/* 9th "See More" Link Card to /stack */}
-          <Link href="/stack">
+          {/* 9th "See More" Link Card */}
+          <Link href="/stack" className="max-md:w-[84vw] max-md:shrink-0 max-md:snap-start">
             <motion.div
-              whileHover={{ y: -6, scale: 1.01 }}
+              whileHover={{ y: -4, scale: 1.01 }}
               transition={{ duration: 0.3 }}
-              className="group cursor-pointer p-8 rounded-2xl border border-dashed border-cyan-500/40 bg-cyan-500/5 hover:bg-cyan-500/10 transition-all duration-300 min-h-[220px] flex flex-col justify-between relative overflow-hidden shadow-lg h-full"
+              className="group cursor-pointer p-6 sm:p-8 rounded-2xl border border-dashed border-cyan-500/40 bg-cyan-500/5 hover:bg-cyan-500/10 transition-all duration-300 min-h-[200px] sm:min-h-[220px] flex flex-col justify-between relative overflow-hidden shadow-lg h-full"
             >
               <div className="flex items-center justify-between w-full">
-                <span className="text-xs font-mono text-cyan-400 uppercase tracking-widest font-semibold flex items-center gap-1.5">
+                <span className="text-[11px] sm:text-xs font-mono text-cyan-400 uppercase tracking-widest font-semibold flex items-center gap-1.5">
                   <Sparkles className="w-3.5 h-3.5" />
                   <span>Ecosystem</span>
                 </span>
-                <div className="w-12 h-12 rounded-2xl bg-cyan-500 text-black flex items-center justify-center shadow-[0_0_20px_rgba(6,182,212,0.4)] group-hover:scale-110 transition-transform">
-                  <ArrowRight className="w-5 h-5" />
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-cyan-500 text-black flex items-center justify-center shadow-[0_0_20px_rgba(6,182,212,0.4)] group-hover:scale-110 transition-transform">
+                  <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
                 </div>
               </div>
 
-              <div className="mt-6">
-                <h3 className="text-xl font-bold text-white mb-2 group-hover:text-cyan-300 transition-colors font-heading flex items-center gap-2">
+              <div className="mt-4 sm:mt-6">
+                <h3 className="text-lg sm:text-xl font-bold text-white mb-1.5 sm:mb-2 group-hover:text-cyan-300 transition-colors font-heading flex items-center gap-2">
                   <span>View Full Stack</span>
                   <span className="text-cyan-400">→</span>
                 </h3>
-                <p className="text-sm text-gray-400 font-sans leading-relaxed">
+                <p className="text-xs sm:text-sm text-gray-400 font-sans leading-relaxed">
                   Explore our complete technology stack including Cloud Infrastructure, AI Engines,
                   & Databases.
                 </p>

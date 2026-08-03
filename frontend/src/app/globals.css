@@ -5,13 +5,16 @@
   --font-heading: var(--font-heading), 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-mono), 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
 
-  --color-bg-dark: #000000; /* Pure black for maximum contrast */
-  --color-surface-dark: #0a0a0a; /* Very dark gray for surfaces */
-  --color-border-subtle: rgba(255, 255, 255, 0.1);
-  --color-muted-dark: #888888;
+  --color-bg-dark: #000000;
+  --color-surface-dark: #0a0a0a;
+  --color-card-dark: #0c0d12;
+  --color-chrome-dark: #121212;
+  --color-border-subtle: rgba(255, 255, 255, 0.15);
+  --color-accent-amber: #cd9d3d;
+  --color-accent-cyan: #06b6d4;
 
-  --color-accent-primary: #ffffff;
-  --color-accent-subtle: rgba(255, 255, 255, 0.05);
+  --shadow-card-glow: 0 30px 65px -15px rgba(0, 0, 0, 0.9), 0 0 45px rgba(6, 182, 212, 0.2);
+  --shadow-card-subtle: 0 18px 35px -10px rgba(0, 0, 0, 0.8);
 }
 
 :root {
@@ -48,10 +51,6 @@ html.lenis body {
   scroll-behavior: auto !important;
 }
 
-.lenis.lenis-smooth [data-lenis-prevent] {
-  overscroll-behavior: contain;
-}
-
 .lenis.lenis-stopped {
   overflow: hidden;
 }
@@ -60,8 +59,7 @@ html.lenis body {
   pointer-events: none;
 }
 
-/* Atmospheric */
-
+/* Atmospheric Noise */
 .bg-noise {
   position: fixed;
   inset: 0;
@@ -72,25 +70,73 @@ html.lenis body {
   mix-blend-mode: overlay;
 }
 
-/* Flagship Surface Containers */
+/* Centralized Tailwind Component Layer - Single Source of Truth */
+@layer components {
+  /* Work Section Card Deck Component Styles - Optimized Mobile Height (h-[63vh], min-h-[390px]) */
+  .work-card-container {
+    @apply relative w-[95vw] sm:w-[86vw] max-w-[1150px] min-w-[280px] h-[63vh] sm:h-[68vh] lg:h-[70vh] max-h-[680px] min-h-[390px] rounded-3xl bg-[#0c0d12] border border-white/15 flex flex-col lg:flex-row p-4 sm:p-6 md:p-8 gap-3 sm:gap-5 md:gap-7 transition-all duration-800 ease-[cubic-bezier(0.16,1,0.3,1)] transform-gpu will-change-transform;
+  }
 
-.flagship-surface {
-  background: rgba(10, 10, 10, 0.6);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  transition:
-    border-color 0.3s ease,
-    background 0.3s ease;
-}
+  .work-meta-panel {
+    @apply flex flex-col justify-between lg:w-[42%] relative z-10 text-left;
+  }
 
-.flagship-surface:hover {
-  border-color: rgba(255, 255, 255, 0.2);
-  background: rgba(20, 20, 20, 0.8);
-}
+  .work-badge-tag {
+    @apply text-[clamp(0.6rem,0.8vw,0.75rem)] font-mono uppercase tracking-widest text-[#cd9d3d] bg-[#cd9d3d]/10 px-3.5 py-1 rounded-full border border-[#cd9d3d]/25 backdrop-blur-md shadow-[0_0_15px_rgba(205,157,61,0.15)] flex items-center gap-2;
+  }
 
-.flagship-border-highlight {
-  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
+  .work-heading-title {
+    @apply text-[clamp(1.75rem,3.5vw,3.5rem)] font-extrabold tracking-tighter font-heading leading-tight bg-gradient-to-r from-white via-gray-100 to-gray-400 bg-clip-text text-transparent;
+  }
+
+  .work-desc-text {
+    @apply text-[clamp(0.75rem,1.1vw,1rem)] text-gray-400 font-normal leading-relaxed font-sans line-clamp-2 sm:line-clamp-3 md:line-clamp-none;
+  }
+
+  .work-metric-box {
+    @apply mt-2 sm:mt-4 bg-black/60 border border-white/10 p-2.5 sm:p-4 rounded-2xl max-w-[240px] flex flex-col gap-0.5 backdrop-blur-xl;
+  }
+
+  .work-metric-val {
+    @apply text-[clamp(1.15rem,2vw,2rem)] font-extrabold text-white tracking-tight bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent;
+  }
+
+  .work-metric-lbl {
+    @apply text-[8px] sm:text-[9px] uppercase tracking-widest text-[#cd9d3d] font-mono;
+  }
+
+  .work-mockup-container {
+    @apply flex-1 h-full lg:w-[58%] min-h-[200px] sm:min-h-[240px] flex flex-col relative z-10 [perspective:1200px];
+  }
+
+  .work-chrome-header {
+    @apply w-full h-[clamp(2.2rem,3.8vh,2.6rem)] bg-[#121212] border-b border-white/10 flex items-center justify-between px-3 gap-3 shrink-0;
+  }
+
+  .work-iframe-window {
+    @apply w-full flex-1 bg-white relative [overscroll-behavior:contain];
+  }
+
+  /* Carousel Navigation Buttons */
+  .work-nav-btn {
+    @apply pointer-events-auto w-[clamp(2.5rem,3.5vw,3.25rem)] h-[clamp(2.5rem,3.5vw,3.25rem)] rounded-full border border-white/15 bg-black/80 hover:bg-cyan-500 hover:text-black hover:border-cyan-500 text-white flex items-center justify-center transition-all shadow-2xl backdrop-blur-md cursor-pointer active:scale-95;
+  }
+
+  /* Flagship Surface Containers */
+  .flagship-surface {
+    background: rgba(10, 10, 10, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    transition:
+      border-color 0.3s ease,
+      background 0.3s ease;
+  }
+
+  .flagship-surface:hover {
+    border-color: rgba(255, 255, 255, 0.2);
+    background: rgba(20, 20, 20, 0.8);
+  }
 }
 
 /* Typography Enhancements */
@@ -171,12 +217,12 @@ html.lenis body {
     border: 1px solid rgba(0, 0, 0, 0.08) !important;
   }
 
-  /* Override hardcoded text-white to be dark */
-  .text-white {
+  /* Override hardcoded text-white to be crisp dark black */
+  .text-white:not(.bg-clip-text) {
     color: #121314 !important;
   }
 
-  /* Override text-white with opacity to be dark in light mode */
+  /* Override text-white with opacity to be crisp dark in light mode */
   .text-white\/10,
   .text-white\/20,
   .text-white\/25,
@@ -191,9 +237,9 @@ html.lenis body {
   .text-white\/75 {
     color: rgba(18, 19, 20, 0.7) !important;
   }
-  .text-white\/80,
-  .text-white\/90,
-  .text-white\/95 {
+  .text-white\/80:not(.bg-clip-text),
+  .text-white\/90:not(.bg-clip-text),
+  .text-white\/95:not(.bg-clip-text) {
     color: rgba(18, 19, 20, 0.95) !important;
   }
 
@@ -206,10 +252,10 @@ html.lenis body {
     color: #55565a !important;
   }
 
-  /* Adjust primary/subtle colors */
+  /* Preserve primary signature cyan accent across all themes */
   .text-cyan-400,
   .text-cyan-300 {
-    color: #0d9488 !important; /* Rich Teal for good contrast in light mode */
+    color: #06b6d4 !important;
   }
 
   .text-green-400,
@@ -217,7 +263,7 @@ html.lenis body {
   .text-green-600,
   .text-emerald-400,
   .text-emerald-500 {
-    color: #c89a43 !important;
+    color: #cd9d3d !important;
   }
 
   .text-violet-400 {
@@ -296,7 +342,7 @@ html.lenis body {
   .bg-white\/5.blur-\[100px\],
   .bg-violet-600\/10,
   .bg-cyan-600\/10 {
-    background-color: rgba(13, 148, 136, 0.02) !important;
+    background-color: rgba(6, 182, 212, 0.05) !important;
   }
 
   /* Flagship surface hover effects */

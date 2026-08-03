@@ -4,7 +4,6 @@ import { useRef, useState, useEffect, useMemo, useCallback } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Clock } from 'lucide-react';
 import { SlideView } from './SlideView';
 import { StackedDeckView } from './StackedDeckView';
 
@@ -25,49 +24,78 @@ export function Work({ workContent }: WorkProps) {
   const [stackedActiveId, setStackedActiveId] = useState<string | null>(null);
   const [hoverTimerProgress, setHoverTimerProgress] = useState<number>(0);
 
+  // Consistent SSR initial state (1200) to prevent hydration mismatches
+  const [screenWidth, setScreenWidth] = useState<number>(1200);
+
   const projects = useMemo(() => workContent.items || [], [workContent]);
+
+  // Handle window resize for dynamic mobile/tablet/desktop 3D card math after client mount
+  useEffect(() => {
+    setScreenWidth(window.innerWidth);
+    const handleResize = () => {
+      setScreenWidth(window.innerWidth);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   // Find active index in projects array memoized
   const activeIdx = useMemo(() => {
     return projects.findIndex((p: any) => p.id === (stackedActiveId || projects[0]?.id));
   }, [projects, stackedActiveId]);
 
-  // Memoized 3D card layout position calculator
-  const calculateCardMath = useCallback((idx: number, activeIndex: number) => {
-    const offset = idx - activeIndex;
-    const isCenter = offset === 0;
-    const absOffset = Math.abs(offset);
+  // Refresh ScrollTrigger whenever view mode changes so vertical page scrolling is smooth
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      ScrollTrigger.refresh();
+    }, 150);
+    return () => clearTimeout(timer);
+  }, [isStacked]);
 
-    if (isCenter) {
+  // Mobile & Tablet Optimized 3D card layout position calculator
+  const calculateCardMath = useCallback(
+    (idx: number, activeIndex: number) => {
+      const offset = idx - activeIndex;
+      const isCenter = offset === 0;
+      const absOffset = Math.abs(offset);
+
+      if (isCenter) {
+        return {
+          translateX: 0,
+          translateY: 0,
+          translateZ: 40,
+          rotateY: 0,
+          scale: 1,
+          zIndex: 50,
+          opacity: 1,
+          isCenter: true,
+        };
+      }
+
+      const direction = offset < 0 ? -1 : 1;
+      const isMobile = screenWidth < 640;
+      const isTablet = screenWidth >= 640 && screenWidth < 1024;
+
+      // Adjust translation & rotation based on screen size
+      const translateXMult = isMobile ? 12 : isTablet ? 16 : 20;
+      const rotateYMax = isMobile ? 0 : isTablet ? 8 : 16;
+      const translateZMult = isMobile ? 35 : 60;
+
       return {
-        translateX: 0,
-        translateY: 0,
-        translateZ: 50,
-        rotateY: 0,
-        scale: 1,
-        zIndex: 50,
+        translateX: direction * (translateXMult * absOffset + 1),
+        translateY: absOffset * 3,
+        translateZ: -translateZMult * absOffset,
+        rotateY: -direction * Math.min(rotateYMax, absOffset * 8),
+        scale: Math.max(0.85, 0.94 - absOffset * 0.05),
+        zIndex: 40 - absOffset * 5,
         opacity: 1,
-        isCenter: true,
+        isCenter: false,
       };
-    }
+    },
+    [screenWidth],
+  );
 
-    const direction = offset < 0 ? -1 : 1;
-    return {
-      translateX: direction * (32 * absOffset + 4),
-      translateY: absOffset * 4,
-      translateZ: -90 * absOffset,
-      rotateY: -direction * Math.min(22, absOffset * 14),
-      scale: Math.max(0.8, 0.94 - absOffset * 0.06),
-      zIndex: 40 - absOffset * 5,
-      opacity: Math.max(0.65, 0.9 - absOffset * 0.12),
-      isCenter: false,
-    };
-  }, []);
-
-  // Scroll stop detection timer ref
-  const scrollStopTimerRef = useRef<NodeJS.Timeout | null>(null);
-
-  // Handle GSAP Horizontal Scroll Pinning
+  // Handle GSAP Horizontal Scroll Pinning when in SlideView mode
   useGSAP(
     () => {
       if (!wrapperRef.current || !sectionRef.current || isStacked) return;
@@ -188,35 +216,18 @@ export function Work({ workContent }: WorkProps) {
     <section
       id="work"
       ref={sectionRef}
-      className={`w-full overflow-hidden bg-[var(--background)] relative z-20 ${
-        isStacked ? 'h-auto min-h-screen py-12' : 'h-screen'
+      className={`w-full overflow-hidden bg-[var(--background)] relative z-20 transition-all duration-300 ${
+        isStacked
+          ? 'h-auto min-h-[90vh] sm:min-h-screen py-[4vh] md:py-[8vh] flex flex-col justify-center items-center'
+          : 'h-screen'
       }`}
     >
-      {/* Title Overlap & Control Badge */}
-      <div className="absolute top-8 md:top-14 left-6 md:left-12 right-6 md:right-12 z-50 flex items-center justify-between pointer-events-none">
+      {/* Title Overlap */}
+      <div className="absolute top-[2.5vh] left-[4vw] right-[4vw] z-50 flex items-center justify-between pointer-events-none">
         <div className="text-white">
-          <span className="text-xs font-mono text-gray-400 uppercase tracking-widest block mb-1">
+          <span className="text-[clamp(0.65rem,1vw,0.85rem)] font-mono text-gray-400 uppercase tracking-widest block">
             {workContent.title}
           </span>
-        </div>
-
-        {/* 3s Reading Timer Indicator */}
-        <div className="pointer-events-auto flex items-center gap-3">
-          {!isStacked && hoveredProjectId && hoverTimerProgress > 0 && (
-            <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-black/70 border border-[#c89a43]/30 text-[10px] font-mono text-[#c89a43] backdrop-blur-xl shadow-[0_0_20px_rgba(200,154,67,0.15)]">
-              <Clock className="w-3.5 h-3.5 animate-spin text-[#c89a43]" />
-              <span>
-                Reading detected... Stacking in{' '}
-                {Math.max(1, Math.ceil(3 - (hoverTimerProgress * 3) / 100))}s
-              </span>
-              <div className="w-14 h-1 bg-white/10 rounded-full overflow-hidden ml-1">
-                <div
-                  className="h-full bg-[#c89a43] transition-all duration-75 shadow-[0_0_8px_#c89a43]"
-                  style={{ width: `${hoverTimerProgress}%` }}
-                />
-              </div>
-            </div>
-          )}
         </div>
       </div>
 
@@ -233,7 +244,7 @@ export function Work({ workContent }: WorkProps) {
               isHovered={hoveredProjectId === project.id}
               iframeKey={iframeKeys[project.id] || 0}
               onMouseEnter={handleMouseEnter}
-              onMouseLeave={handleMouseLeave}
+              onMouseLeave={() => setHoveredProjectId(null)}
               reloadIframe={reloadIframe}
             />
           ))}
