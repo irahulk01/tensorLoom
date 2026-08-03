@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { Plus_Jakarta_Sans, Inter, JetBrains_Mono } from 'next/font/google';
-import './globals.css';
-import { LenisProvider } from '@/components/common/LenisProvider';
+import '@/styles/globals.css';
+import { LenisProvider } from '@/providers/LenisProvider';
 
 const headingFont = Plus_Jakarta_Sans({
   variable: '--font-heading',

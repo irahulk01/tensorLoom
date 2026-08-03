@@ -26,7 +26,6 @@ export const StackedDeckView = memo(function StackedDeckView({
   const [loadedProjectIds, setLoadedProjectIds] = useState<Set<string>>(
     () => new Set([projects[activeIdx]?.id]),
   );
-  const [activeScrollId, setActiveScrollId] = useState<string | null>(null);
 
   useEffect(() => {
     // Ensure active card is immediately marked as loaded
@@ -103,14 +102,6 @@ export const StackedDeckView = memo(function StackedDeckView({
                   : '0 20px 40px -10px rgba(0,0,0,0.5)',
               }}
             >
-              {/* Click indicator badge for sidewise peeking cards */}
-              {!isCenter && (
-                <div className="absolute top-4 right-4 z-50 bg-[#c89a43] text-black text-[10px] font-bold font-mono px-3.5 py-1.5 rounded-full shadow-[0_0_15px_rgba(200,154,67,0.4)] group-hover:scale-105 transition-transform flex items-center gap-1.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-black animate-ping" />
-                  <span>Click to Bring to Front</span>
-                </div>
-              )}
-
               {/* Background gradient hint */}
               <div
                 className={`absolute inset-0 bg-gradient-to-br ${project.accentColor} ${
@@ -196,12 +187,7 @@ export const StackedDeckView = memo(function StackedDeckView({
                       }}
                     >
                       <div className="absolute inset-0 bg-[#0d0d0d] flex items-center justify-center z-0 pointer-events-none">
-                        <div className="flex flex-col items-center gap-2">
-                          <div className="w-5 h-5 border-2 border-cyan-400 border-t-transparent rounded-full animate-spin" />
-                          <span className="text-[9px] text-gray-500 font-mono">
-                            Loading live site...
-                          </span>
-                        </div>
+                        <div className="w-5 h-5 border-2 border-cyan-400 border-t-transparent rounded-full animate-spin" />
                       </div>
 
                       {loadedProjectIds.has(project.id) ? (
@@ -217,9 +203,7 @@ export const StackedDeckView = memo(function StackedDeckView({
                         />
                       ) : (
                         <div className="absolute inset-0 bg-[#0d0d0d] flex items-center justify-center z-10">
-                          <span className="text-[9px] text-gray-600 font-mono">
-                            Loading preview...
-                          </span>
+                          <div className="w-5 h-5 border-2 border-cyan-400 border-t-transparent rounded-full animate-spin" />
                         </div>
                       )}
                     </div>

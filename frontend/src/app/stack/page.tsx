@@ -19,17 +19,9 @@ import {
   ExternalLink,
 } from 'lucide-react';
 import { fetchContent } from '@/lib/api';
+import { languages } from '@/constants/languages';
 import { Navbar } from '@/features/navbar/components/Navbar';
 import { Footer } from '@/features/footer/components/Footer';
-
-const languages = [
-  { code: 'en', label: 'English', flag: '🇺🇸' },
-  { code: 'es', label: 'Español', flag: '🇪🇸' },
-  { code: 'de', label: 'Deutsch', flag: '🇩🇪' },
-  { code: 'fr', label: 'Français', flag: '🇫🇷' },
-  { code: 'ja', label: '日本語', flag: '🇯🇵' },
-  { code: 'hi', label: 'हिन्दी', flag: '🇮🇳' },
-];
 
 const fullStackCategories = [
   {

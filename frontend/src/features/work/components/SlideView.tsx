@@ -1,7 +1,7 @@
 'use client';
 
 import { memo, useState } from 'react';
-import { ExternalLink, RefreshCw, MousePointerClick } from 'lucide-react';
+import { ExternalLink, RefreshCw } from 'lucide-react';
 
 interface SlideViewProps {
   project: any;
@@ -71,7 +71,7 @@ export const SlideView = memo(function SlideView({
         <div className="flex-1 h-full lg:w-3/5 min-h-[300px] flex flex-col relative z-10 [perspective:1200px]">
           {project.url ? (
             <div
-              className="w-full h-full rounded-2xl overflow-hidden bg-[#0d0d0d] border border-white/10 flex flex-col shadow-2xl transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)]"
+              className="w-full h-full rounded-2xl overflow-hidden bg-[#0d0d0d] border border-white/10 flex flex-col shadow-2xl transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] transform-gpu will-change-transform"
               style={{
                 transform: isHovered ? 'none' : 'rotateY(-12deg) rotateX(4deg) skewY(-1deg)',
                 boxShadow: isHovered
@@ -139,7 +139,9 @@ export const SlideView = memo(function SlideView({
                   key={`${project.id}-${iframeKey}`}
                   src={project.url}
                   title={`Live preview of ${project.title}`}
-                  className="w-full h-full border-none relative z-10 bg-white pointer-events-auto"
+                  className={`w-full h-full border-none relative z-10 bg-white ${
+                    isHovered ? 'pointer-events-auto' : 'pointer-events-none'
+                  }`}
                   sandbox="allow-scripts allow-same-origin allow-popups allow-forms allow-modals"
                   loading="eager"
                 />

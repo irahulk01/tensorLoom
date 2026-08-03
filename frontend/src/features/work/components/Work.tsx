@@ -4,7 +4,6 @@ import { useRef, useState, useEffect, useMemo, useCallback } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Clock } from 'lucide-react';
 import { SlideView } from './SlideView';
 import { StackedDeckView } from './StackedDeckView';
 
@@ -23,7 +22,6 @@ export function Work({ workContent }: WorkProps) {
   const [hoveredProjectId, setHoveredProjectId] = useState<string | null>(null);
   const [isStacked, setIsStacked] = useState<boolean>(false);
   const [stackedActiveId, setStackedActiveId] = useState<string | null>(null);
-  const [hoverTimerProgress, setHoverTimerProgress] = useState<number>(0);
 
   const projects = useMemo(() => workContent.items || [], [workContent]);
 
@@ -64,9 +62,6 @@ export function Work({ workContent }: WorkProps) {
     };
   }, []);
 
-  // Scroll stop detection timer ref
-  const scrollStopTimerRef = useRef<NodeJS.Timeout | null>(null);
-
   // Handle GSAP Horizontal Scroll Pinning
   useGSAP(
     () => {
@@ -98,26 +93,7 @@ export function Work({ workContent }: WorkProps) {
     { scope: sectionRef, dependencies: [projects, isStacked] },
   );
 
-  // Timer interval for progress bar feedback (3 seconds reading detection)
-  useEffect(() => {
-    let interval: NodeJS.Timeout | null = null;
-    if (hoveredProjectId && !isStacked) {
-      setHoverTimerProgress(0);
-      const startTime = Date.now();
-      interval = setInterval(() => {
-        const elapsed = Date.now() - startTime;
-        const progress = Math.min((elapsed / 3000) * 100, 100);
-        setHoverTimerProgress(progress);
-      }, 30);
-    } else {
-      setHoverTimerProgress(0);
-    }
-    return () => {
-      if (interval) clearInterval(interval);
-    };
-  }, [hoveredProjectId, isStacked]);
-
-  // Explicit Reading Detection trigger function (3 second reading duration threshold)
+  // Explicit Reading Detection trigger function (3 second duration threshold)
   const detectReadingUser = useCallback(
     (projectId: string) => {
       setHoveredProjectId(projectId);
@@ -163,7 +139,6 @@ export function Work({ workContent }: WorkProps) {
     if (!isStacked) {
       if (timerRef.current) clearTimeout(timerRef.current);
       setHoveredProjectId(null);
-      setHoverTimerProgress(0);
     }
   }, [isStacked]);
 
@@ -192,31 +167,12 @@ export function Work({ workContent }: WorkProps) {
         isStacked ? 'h-auto min-h-screen py-12' : 'h-screen'
       }`}
     >
-      {/* Title Overlap & Control Badge */}
+      {/* Header Section Title */}
       <div className="absolute top-8 md:top-14 left-6 md:left-12 right-6 md:right-12 z-50 flex items-center justify-between pointer-events-none">
         <div className="text-white">
           <span className="text-xs font-mono text-gray-400 uppercase tracking-widest block mb-1">
             {workContent.title}
           </span>
-        </div>
-
-        {/* 3s Reading Timer Indicator */}
-        <div className="pointer-events-auto flex items-center gap-3">
-          {!isStacked && hoveredProjectId && hoverTimerProgress > 0 && (
-            <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-black/70 border border-[#c89a43]/30 text-[10px] font-mono text-[#c89a43] backdrop-blur-xl shadow-[0_0_20px_rgba(200,154,67,0.15)]">
-              <Clock className="w-3.5 h-3.5 animate-spin text-[#c89a43]" />
-              <span>
-                Reading detected... Stacking in{' '}
-                {Math.max(1, Math.ceil(3 - (hoverTimerProgress * 3) / 100))}s
-              </span>
-              <div className="w-14 h-1 bg-white/10 rounded-full overflow-hidden ml-1">
-                <div
-                  className="h-full bg-[#c89a43] transition-all duration-75 shadow-[0_0_8px_#c89a43]"
-                  style={{ width: `${hoverTimerProgress}%` }}
-                />
-              </div>
-            </div>
-          )}
         </div>
       </div>
 
