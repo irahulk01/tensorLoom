@@ -64,14 +64,14 @@ export function Hero({ heroContent, startVideo }: HeroProps) {
       ref={container}
       className="hero-section relative min-h-screen w-full flex flex-col items-center justify-center pt-32 pb-24 px-6 md:px-12 overflow-hidden bg-[var(--background)]"
     >
-      {/* Video Background with Seamless Edge Mask */}
+      {/* Video Background with Mobile-Only Uplift (Desktop Untouched) */}
       <div className="absolute inset-0 z-0 overflow-hidden [mask-image:linear-gradient(to_bottom,black_75%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,black_75%,transparent_100%)]">
         <video
           autoPlay
           loop
           muted
           playsInline
-          className="absolute inset-x-0 bottom-0 top-[-26vh] sm:top-[-80px] md:top-[-230px] w-full h-full object-cover"
+          className="absolute inset-x-0 bottom-0 max-sm:top-0 top-[-26vh] sm:top-[-80px] md:top-[-230px] w-full h-full object-cover"
           src="/gifhero/cbb1942f9536d15f774a9a1e58fc0d07.mp4"
         />
         <div className="absolute inset-0 bg-black/60" />
@@ -88,18 +88,18 @@ export function Hero({ heroContent, startVideo }: HeroProps) {
           </span>
         </div>
 
-        {/* Typographic Headline (Plus Jakarta Sans) */}
+        {/* Typographic Headline (Mobile-Only 4xl scale, Desktop 100% original 6xl/8xl/9xl) */}
         <div className="mb-8 flex flex-wrap justify-end gap-x-4 gap-y-2 overflow-hidden px-4">
           {words.map((word: string, i: number) => (
             <span key={i} className="inline-flex overflow-hidden pb-2">
-              <span className="hero-word opacity-0 text-6xl md:text-8xl lg:text-9xl font-extrabold tracking-tighter text-white font-heading">
+              <span className="hero-word opacity-0 text-4xl sm:text-6xl md:text-8xl lg:text-9xl font-extrabold tracking-tighter text-white font-heading">
                 {word}
               </span>
             </span>
           ))}
         </div>
 
-        {/* Subtitle (Inter) */}
+        {/* Subtitle */}
         <p className="hero-sub opacity-0 text-gray-400 max-w-2xl text-lg md:text-xl leading-relaxed mb-12 font-normal text-right font-sans">
           {heroContent?.subtitle ||
             '5+ years of engineering taught us that complexity kills. We ship fast, precise software for teams that cannot afford to fail.'}

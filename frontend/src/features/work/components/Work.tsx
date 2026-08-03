@@ -22,47 +22,80 @@ export function Work({ workContent }: WorkProps) {
   const [hoveredProjectId, setHoveredProjectId] = useState<string | null>(null);
   const [isStacked, setIsStacked] = useState<boolean>(false);
   const [stackedActiveId, setStackedActiveId] = useState<string | null>(null);
+  const [hoverTimerProgress, setHoverTimerProgress] = useState<number>(0);
+
+  // Consistent SSR initial state (1200) to prevent hydration mismatches
+  const [screenWidth, setScreenWidth] = useState<number>(1200);
 
   const projects = useMemo(() => workContent.items || [], [workContent]);
+
+  // Handle window resize for dynamic mobile/tablet/desktop 3D card math after client mount
+  useEffect(() => {
+    setScreenWidth(window.innerWidth);
+    const handleResize = () => {
+      setScreenWidth(window.innerWidth);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   // Find active index in projects array memoized
   const activeIdx = useMemo(() => {
     return projects.findIndex((p: any) => p.id === (stackedActiveId || projects[0]?.id));
   }, [projects, stackedActiveId]);
 
-  // Memoized 3D card layout position calculator
-  const calculateCardMath = useCallback((idx: number, activeIndex: number) => {
-    const offset = idx - activeIndex;
-    const isCenter = offset === 0;
-    const absOffset = Math.abs(offset);
+  // Refresh ScrollTrigger whenever view mode changes so vertical page scrolling is smooth
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      ScrollTrigger.refresh();
+    }, 150);
+    return () => clearTimeout(timer);
+  }, [isStacked]);
 
-    if (isCenter) {
+  // Mobile & Tablet Optimized 3D card layout position calculator
+  const calculateCardMath = useCallback(
+    (idx: number, activeIndex: number) => {
+      const offset = idx - activeIndex;
+      const isCenter = offset === 0;
+      const absOffset = Math.abs(offset);
+
+      if (isCenter) {
+        return {
+          translateX: 0,
+          translateY: 0,
+          translateZ: 40,
+          rotateY: 0,
+          scale: 1,
+          zIndex: 50,
+          opacity: 1,
+          isCenter: true,
+        };
+      }
+
+      const direction = offset < 0 ? -1 : 1;
+      const isMobile = screenWidth < 640;
+      const isTablet = screenWidth >= 640 && screenWidth < 1024;
+
+      // Adjust translation & rotation based on screen size
+      const translateXMult = isMobile ? 12 : isTablet ? 16 : 20;
+      const rotateYMax = isMobile ? 0 : isTablet ? 8 : 16;
+      const translateZMult = isMobile ? 35 : 60;
+
       return {
-        translateX: 0,
-        translateY: 0,
-        translateZ: 50,
-        rotateY: 0,
-        scale: 1,
-        zIndex: 50,
+        translateX: direction * (translateXMult * absOffset + 1),
+        translateY: absOffset * 3,
+        translateZ: -translateZMult * absOffset,
+        rotateY: -direction * Math.min(rotateYMax, absOffset * 8),
+        scale: Math.max(0.85, 0.94 - absOffset * 0.05),
+        zIndex: 40 - absOffset * 5,
         opacity: 1,
-        isCenter: true,
+        isCenter: false,
       };
-    }
+    },
+    [screenWidth],
+  );
 
-    const direction = offset < 0 ? -1 : 1;
-    return {
-      translateX: direction * (32 * absOffset + 4),
-      translateY: absOffset * 4,
-      translateZ: -90 * absOffset,
-      rotateY: -direction * Math.min(22, absOffset * 14),
-      scale: Math.max(0.8, 0.94 - absOffset * 0.06),
-      zIndex: 40 - absOffset * 5,
-      opacity: Math.max(0.65, 0.9 - absOffset * 0.12),
-      isCenter: false,
-    };
-  }, []);
-
-  // Handle GSAP Horizontal Scroll Pinning
+  // Handle GSAP Horizontal Scroll Pinning when in SlideView mode
   useGSAP(
     () => {
       if (!wrapperRef.current || !sectionRef.current || isStacked) return;
@@ -93,7 +126,26 @@ export function Work({ workContent }: WorkProps) {
     { scope: sectionRef, dependencies: [projects, isStacked] },
   );
 
-  // Explicit Reading Detection trigger function (3 second duration threshold)
+  // Timer interval for progress bar feedback (3 seconds reading detection)
+  useEffect(() => {
+    let interval: NodeJS.Timeout | null = null;
+    if (hoveredProjectId && !isStacked) {
+      setHoverTimerProgress(0);
+      const startTime = Date.now();
+      interval = setInterval(() => {
+        const elapsed = Date.now() - startTime;
+        const progress = Math.min((elapsed / 3000) * 100, 100);
+        setHoverTimerProgress(progress);
+      }, 30);
+    } else {
+      setHoverTimerProgress(0);
+    }
+    return () => {
+      if (interval) clearInterval(interval);
+    };
+  }, [hoveredProjectId, isStacked]);
+
+  // Explicit Reading Detection trigger function (3 second reading duration threshold)
   const detectReadingUser = useCallback(
     (projectId: string) => {
       setHoveredProjectId(projectId);
@@ -139,6 +191,7 @@ export function Work({ workContent }: WorkProps) {
     if (!isStacked) {
       if (timerRef.current) clearTimeout(timerRef.current);
       setHoveredProjectId(null);
+      setHoverTimerProgress(0);
     }
   }, [isStacked]);
 
@@ -163,14 +216,16 @@ export function Work({ workContent }: WorkProps) {
     <section
       id="work"
       ref={sectionRef}
-      className={`w-full overflow-hidden bg-[var(--background)] relative z-20 ${
-        isStacked ? 'h-auto min-h-screen py-12' : 'h-screen'
+      className={`w-full overflow-hidden bg-[var(--background)] relative z-20 transition-all duration-300 ${
+        isStacked
+          ? 'h-auto min-h-[90vh] sm:min-h-screen py-[4vh] md:py-[8vh] flex flex-col justify-center items-center'
+          : 'h-screen'
       }`}
     >
-      {/* Header Section Title */}
-      <div className="absolute top-8 md:top-14 left-6 md:left-12 right-6 md:right-12 z-50 flex items-center justify-between pointer-events-none">
+      {/* Title Overlap */}
+      <div className="absolute top-[2.5vh] left-[4vw] right-[4vw] z-50 flex items-center justify-between pointer-events-none">
         <div className="text-white">
-          <span className="text-xs font-mono text-gray-400 uppercase tracking-widest block mb-1">
+          <span className="text-[clamp(0.65rem,1vw,0.85rem)] font-mono text-gray-400 uppercase tracking-widest block">
             {workContent.title}
           </span>
         </div>
@@ -189,7 +244,7 @@ export function Work({ workContent }: WorkProps) {
               isHovered={hoveredProjectId === project.id}
               iframeKey={iframeKeys[project.id] || 0}
               onMouseEnter={handleMouseEnter}
-              onMouseLeave={handleMouseLeave}
+              onMouseLeave={() => setHoveredProjectId(null)}
               reloadIframe={reloadIframe}
             />
           ))}

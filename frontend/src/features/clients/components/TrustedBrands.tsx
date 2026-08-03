@@ -9,34 +9,33 @@ gsap.registerPlugin(ScrollTrigger);
 
 // Row 1: 5 brands moving left
 const brandsRow1 = [
-  { name: 'Neumyth Marketing', url: 'https://neumythmarketing.com/', abbr: 'NM', hue: '#F59E0B' },
-  { name: 'Classmates', url: 'https://www.classmates.com/', abbr: 'CM', hue: '#8B5CF6' },
+  { name: 'Neumyth Marketing', url: 'https://neumythmarketing.com/', abbr: 'NM', hue: '#06B6D4' },
+  { name: 'Classmates', url: 'https://www.classmates.com/', abbr: 'CM', hue: '#cd9d3d' },
   {
     name: 'Vankazo',
     url: 'https://dashboard.vankazo.de/admin/auth/login',
     abbr: 'VKZ',
-    hue: '#EAB308',
+    hue: '#06B6D4',
   },
-  { name: 'Soul Syncing', url: 'https://soulsync.com/', abbr: 'SS', hue: '#F43F5E' },
+  { name: 'Soul Syncing', url: 'https://soulsync.com/', abbr: 'SS', hue: '#cd9d3d' },
   {
     name: 'Multifolks',
     url: 'https://multifolks.com/',
     abbr: 'MF',
     hue: '#06B6D4',
-    svgUrl: 'https://cdn.multifolks.com/desktop/images/multifolks-logo.svg',
   },
 ];
 
 // Row 2: 4 brands moving right (reverse)
 const brandsRow2 = [
-  { name: 'Raj Communications', url: 'https://rajcommunication.net/', abbr: 'RC', hue: '#3B82F6' },
-  { name: 'Moneyvisionaries', url: 'https://www.moneyvisionaries.in/', abbr: 'MV', hue: '#10B981' },
-  { name: 'Map my tour', url: '#', abbr: 'MMT', hue: '#F97316' },
+  { name: 'Raj Communications', url: 'https://rajcommunication.net/', abbr: 'RC', hue: '#cd9d3d' },
+  { name: 'Moneyvisionaries', url: 'https://www.moneyvisionaries.in/', abbr: 'MV', hue: '#06B6D4' },
+  { name: 'Map my tour', url: '#', abbr: 'MMT', hue: '#cd9d3d' },
   {
     name: 'Inspiring Together',
     url: 'https://inspiringtogether.aonetech.in/',
     abbr: 'IT',
-    hue: '#EC4899',
+    hue: '#06B6D4',
   },
 ];
 
@@ -54,30 +53,29 @@ function BrandPill({ brand }: { brand: Brand }) {
       href={brand.url}
       target="_blank"
       rel="noopener noreferrer"
-      className="brand-card relative group shrink-0 flex items-center gap-4 px-7 py-4 rounded-full border border-white/10 bg-white/5 hover:bg-white/10 backdrop-blur-md transition-all duration-500 cursor-pointer select-none overflow-hidden"
+      className="brand-card relative group shrink-0 flex items-center gap-3.5 sm:gap-4 px-5 py-3 sm:px-7 sm:py-4 rounded-full border border-gray-200 dark:border-white/10 bg-white/90 dark:bg-white/5 hover:bg-white dark:hover:bg-white/10 backdrop-blur-md transition-all duration-500 cursor-pointer select-none overflow-hidden shadow-sm hover:shadow-md"
       style={{
-        boxShadow: '0 0 0 0 transparent',
         transition: 'box-shadow 0.4s ease, border-color 0.4s ease, background 0.4s ease',
       }}
       onMouseEnter={(e) => {
         (e.currentTarget as HTMLElement).style.boxShadow =
-          `0 0 30px -5px ${brand.hue}40, inset 0 0 30px -15px ${brand.hue}20`;
+          `0 0 25px -5px ${brand.hue}35, inset 0 0 20px -10px ${brand.hue}15`;
         (e.currentTarget as HTMLElement).style.borderColor = `${brand.hue}60`;
       }}
       onMouseLeave={(e) => {
-        (e.currentTarget as HTMLElement).style.boxShadow = '0 0 0 0 transparent';
+        (e.currentTarget as HTMLElement).style.boxShadow = '0 2px 10px rgba(0,0,0,0.03)';
         (e.currentTarget as HTMLElement).style.borderColor = '';
       }}
     >
       {/* Glow orb behind monogram */}
       <div
-        className="absolute -left-2 -top-2 w-16 h-16 rounded-full opacity-0 group-hover:opacity-30 transition-opacity duration-500 blur-xl pointer-events-none"
+        className="absolute -left-2 -top-2 w-16 h-16 rounded-full opacity-0 group-hover:opacity-25 transition-opacity duration-500 blur-xl pointer-events-none"
         style={{ background: brand.hue }}
       />
 
-      {/* Monogram / SVG Logo */}
+      {/* Monogram Badge */}
       <div
-        className="relative w-10 h-10 rounded-full flex items-center justify-center text-xs font-bold font-mono shrink-0 transition-transform duration-300 group-hover:scale-110"
+        className="relative w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center text-[10px] sm:text-xs font-bold font-mono shrink-0 transition-transform duration-300 group-hover:scale-110 shadow-sm"
         style={{
           background: `${brand.hue}18`,
           border: `1px solid ${brand.hue}40`,
@@ -85,14 +83,18 @@ function BrandPill({ brand }: { brand: Brand }) {
         }}
       >
         {brand.svgUrl ? (
-          <img src={brand.svgUrl} alt={brand.name} className="w-6 h-6 object-contain" />
+          <img
+            src={brand.svgUrl}
+            alt={brand.name}
+            className="w-5 h-5 sm:w-6 sm:h-6 object-contain"
+          />
         ) : (
           brand.abbr
         )}
       </div>
 
       {/* Brand Name */}
-      <span className="text-sm font-semibold tracking-wide text-white/70 group-hover:text-white transition-colors duration-300 font-sans whitespace-nowrap">
+      <span className="text-xs sm:text-sm font-bold tracking-wide text-gray-900 dark:text-white transition-colors duration-300 font-sans whitespace-nowrap">
         {brand.name}
       </span>
 
@@ -183,7 +185,7 @@ export function TrustedBrands() {
   return (
     <section
       ref={sectionRef}
-      className="w-full py-24 md:py-32 bg-[var(--background)] relative z-20 overflow-hidden border-t border-white/10"
+      className="w-full pt-16 pb-28 md:py-32 bg-[var(--background)] relative z-20 overflow-hidden border-t border-gray-200 dark:border-white/10"
     >
       {/* Ambient background grid */}
       <div
@@ -195,50 +197,56 @@ export function TrustedBrands() {
         }}
       />
 
-      {/* Subtle radial glow center */}
+      {/* Subtle multi-shade cyan/gold radial glow center */}
       <div
         className="absolute inset-0 pointer-events-none z-0"
         style={{
           background:
-            'radial-gradient(ellipse 80% 50% at 50% 50%, rgba(6,182,212,0.06) 0%, transparent 70%)',
+            'radial-gradient(ellipse 80% 50% at 50% 50%, rgba(6,182,212,0.06) 0%, rgba(205,157,61,0.04) 40%, transparent 75%)',
         }}
       />
 
-      <div className="relative z-10 max-w-[1400px] mx-auto px-6 md:px-12">
+      <div className="relative z-10 max-w-[1400px] mx-auto px-4 sm:px-6 md:px-12">
         {/* ── Header ── */}
         <div
           ref={headingRef}
-          className="mb-16 flex flex-col md:flex-row md:items-end md:justify-between gap-6"
+          className="mb-10 sm:mb-16 flex flex-col md:flex-row md:items-end md:justify-between gap-4 sm:gap-6"
         >
           <div>
-            <span className="inline-flex items-center gap-2 text-[10px] font-mono text-cyan-400 uppercase tracking-[0.3em] mb-4 font-semibold">
-              <span className="w-6 h-[1px] bg-cyan-500/40 inline-block" />
+            <span className="inline-flex items-center gap-2 text-[10px] font-mono text-[#cd9d3d] uppercase tracking-[0.25em] mb-3 font-semibold">
+              <span className="w-5 h-[1px] bg-gradient-to-r from-[#e6c275] to-[#cd9d3d] inline-block" />
               Trusted By
-              <span className="w-6 h-[1px] bg-cyan-500/40 inline-block" />
+              <span className="w-5 h-[1px] bg-gradient-to-r from-[#cd9d3d] to-[#b58428] inline-block" />
             </span>
 
-            <h2 className="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-[-0.03em] leading-none text-white font-heading">
-              Companies That <span className="text-cyan-400">Trust Us</span>
+            <h2 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-[-0.03em] leading-tight text-gray-900 dark:text-white font-heading">
+              Companies That{' '}
+              <span className="bg-gradient-to-r from-[#b58428] via-[#cd9d3d] to-[#8a6116] dark:from-[#f3db9e] dark:via-[#cd9d3d] dark:to-[#b58428] bg-clip-text text-transparent font-extrabold">
+                Trust Us
+              </span>
             </h2>
           </div>
 
-          <p className="max-w-xs text-sm text-gray-400 font-sans leading-relaxed text-left md:text-right">
+          <p className="max-w-xs text-xs sm:text-sm text-gray-600 dark:text-gray-400 font-sans leading-relaxed text-left md:text-right">
             From early-stage startups to established enterprises — we've built for them all.
           </p>
         </div>
 
         {/* ── Divider ── */}
-        <div ref={dividerRef} className="w-full h-[1px] mb-12 bg-white/10" />
+        <div
+          ref={dividerRef}
+          className="w-full h-[1px] mb-8 sm:mb-12 bg-gray-200 dark:bg-white/10"
+        />
 
         {/* ── Marquee Rows ── */}
-        <div className="flex flex-col gap-5">
+        <div className="flex flex-col gap-4 sm:gap-5">
           {/* Row 1 – Left scrolling */}
           <div ref={row1Ref} className="w-full overflow-hidden relative opacity-0">
             {/* Fade masks using var(--background) */}
-            <div className="absolute inset-y-0 left-0 w-32 z-10 pointer-events-none bg-gradient-to-r from-[var(--background)] to-transparent" />
-            <div className="absolute inset-y-0 right-0 w-32 z-10 pointer-events-none bg-gradient-to-l from-[var(--background)] to-transparent" />
+            <div className="absolute inset-y-0 left-0 w-16 sm:w-32 z-10 pointer-events-none bg-gradient-to-r from-[var(--background)] to-transparent" />
+            <div className="absolute inset-y-0 right-0 w-16 sm:w-32 z-10 pointer-events-none bg-gradient-to-l from-[var(--background)] to-transparent" />
 
-            <div className="animate-marquee gap-4 items-center">
+            <div className="animate-marquee gap-3 sm:gap-4 items-center">
               {doubleRow1.map((brand, idx) => (
                 <BrandPill key={`r1-${idx}`} brand={brand} />
               ))}
@@ -248,10 +256,10 @@ export function TrustedBrands() {
           {/* Row 2 – Right scrolling (reverse) */}
           <div ref={row2Ref} className="w-full overflow-hidden relative opacity-0">
             {/* Fade masks using var(--background) */}
-            <div className="absolute inset-y-0 left-0 w-32 z-10 pointer-events-none bg-gradient-to-r from-[var(--background)] to-transparent" />
-            <div className="absolute inset-y-0 right-0 w-32 z-10 pointer-events-none bg-gradient-to-l from-[var(--background)] to-transparent" />
+            <div className="absolute inset-y-0 left-0 w-16 sm:w-32 z-10 pointer-events-none bg-gradient-to-r from-[var(--background)] to-transparent" />
+            <div className="absolute inset-y-0 right-0 w-16 sm:w-32 z-10 pointer-events-none bg-gradient-to-l from-[var(--background)] to-transparent" />
 
-            <div className="animate-marquee-reverse gap-4 items-center">
+            <div className="animate-marquee-reverse gap-3 sm:gap-4 items-center">
               {doubleRow2.map((brand, idx) => (
                 <BrandPill key={`r2-${idx}`} brand={brand} />
               ))}
@@ -260,17 +268,17 @@ export function TrustedBrands() {
         </div>
 
         {/* ── Bottom stat strip ── */}
-        <div className="mt-16 pt-10 border-t border-white/10 flex flex-wrap gap-8 md:gap-16">
+        <div className="mt-12 sm:mt-16 pt-8 sm:pt-10 border-t border-gray-200 dark:border-white/10 grid grid-cols-3 gap-3 sm:flex sm:flex-wrap sm:gap-12 md:gap-16 pb-12 sm:pb-0">
           {[
             { value: '9+', label: 'Clients served' },
             { value: '15+', label: 'Active partnerships' },
             { value: '100%', label: 'Client retention' },
           ].map((stat) => (
-            <div key={stat.label} className="flex flex-col gap-1">
-              <span className="text-2xl md:text-3xl font-extrabold text-white tracking-tight font-heading">
+            <div key={stat.label} className="flex flex-col gap-0.5 sm:gap-1">
+              <span className="text-xl sm:text-2xl md:text-3xl font-extrabold text-gray-900 dark:text-white tracking-tight font-heading">
                 {stat.value}
               </span>
-              <span className="text-[11px] text-gray-400 uppercase tracking-widest font-mono">
+              <span className="text-[9px] sm:text-[11px] text-gray-600 dark:text-gray-400 uppercase tracking-wider font-mono">
                 {stat.label}
               </span>
             </div>
