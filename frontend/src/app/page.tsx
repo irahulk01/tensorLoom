@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { fetchContent } from '@/lib/api';
+import { languages } from '@/constants/languages';
 
 import { Navbar } from '@/features/navbar/components/Navbar';
 import { Hero } from '@/features/hero/components/Hero';
@@ -16,15 +17,6 @@ import { TrustedBrands } from '@/features/clients/components/TrustedBrands';
 import Contact from '@/features/contact/components/Contact';
 import { Footer } from '@/features/footer/components/Footer';
 import { CurtainLoader } from '@/components/animations/CurtainLoader';
-
-const languages = [
-  { code: 'en', label: 'English', flag: '🇺🇸' },
-  { code: 'es', label: 'Español', flag: '🇪🇸' },
-  { code: 'de', label: 'Deutsch', flag: '🇩🇪' },
-  { code: 'fr', label: 'Français', flag: '🇫🇷' },
-  { code: 'ja', label: '日本語', flag: '🇯🇵' },
-  { code: 'hi', label: 'हिन्दी', flag: '🇮🇳' },
-];
 
 export default function Home() {
   const [currentLang, setCurrentLang] = useState('en');
