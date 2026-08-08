@@ -4,6 +4,8 @@ import '@/styles/globals.css';
 import { LenisProvider } from '@/providers/LenisProvider';
 import { ThemeProvider } from '@/context/ThemeContext';
 
+import { ReactQueryProvider } from '@/providers/ReactQueryProvider';
+
 const headingFont = Plus_Jakarta_Sans({
   variable: '--font-heading',
   subsets: ['latin'],
@@ -39,7 +41,9 @@ export default function RootLayout({
     >
       <body suppressHydrationWarning>
         <ThemeProvider>
-          <LenisProvider>{children}</LenisProvider>
+          <ReactQueryProvider>
+            <LenisProvider>{children}</LenisProvider>
+          </ReactQueryProvider>
         </ThemeProvider>
       </body>
     </html>

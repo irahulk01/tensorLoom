@@ -231,6 +231,8 @@ textarea,
 select {
   background-color: #fcfbf9;
   color: #0f1117;
+  font-family: var(--font-heading), 'Plus Jakarta Sans', sans-serif;
+  letter-spacing: -0.01em;
 }
 
 html.dark input,
@@ -239,6 +241,47 @@ html.dark select {
   background-color: #1a1d28 !important;
   color: #f8fafc !important;
   border-color: rgba(201, 155, 62, 0.3) !important;
+}
+
+/* react-phone-number-input custom aesthetic styling */
+.PhoneInput {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.PhoneInputCountry {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background-color: rgba(201, 155, 62, 0.1);
+  padding: 6px 10px;
+  border-radius: 12px;
+  border: 1px solid rgba(201, 155, 62, 0.3);
+}
+
+.PhoneInputCountryIcon {
+  width: 22px;
+  height: 15px;
+  border-radius: 2px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.PhoneInputCountrySelect {
+  font-family: var(--font-heading), 'Plus Jakarta Sans', sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.PhoneInputInput {
+  flex: 1;
+  background: transparent !important;
+  border: none !important;
+  outline: none !important;
+  font-family: var(--font-mono), 'JetBrains Mono', monospace !important;
+  font-weight: 600;
+  letter-spacing: 0.02em;
 }
 
 /* Custom Scrollbar */
