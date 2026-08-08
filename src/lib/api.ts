@@ -161,29 +161,45 @@ export async function fetchContent(lang: string) {
   }
 }
 
+export async function fetchContacts({
+  page = 1,
+  limit = 9,
+  sort = 'newest',
+}: {
+  page?: number;
+  limit?: number;
+  sort?: string;
+}) {
+  const apiBase = getApiBase();
+  const res = await fetch(`${apiBase}/api/contact?page=${page}&limit=${limit}&sort=${sort}`);
+  if (!res.ok) {
+    throw new Error('Failed to fetch contact submissions');
+  }
+  return res.json();
+}
+
 export async function submitContact(formData: {
   name: string;
   email: string;
   phone?: string;
+  countryCode?: string;
+  service?: string;
   company?: string;
   message: string;
 }) {
-  try {
-    const apiBase = getApiBase();
-    const response = await fetch(`${apiBase}/api/contact`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(formData),
-    });
-    if (!response.ok) {
-      throw new Error('Failed to submit contact');
-    }
-    return response.json();
-  } catch (err) {
-    return { success: true, message: 'Message sent successfully.' };
+  const apiBase = getApiBase();
+  const response = await fetch(`${apiBase}/api/contact`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(formData),
+  });
+  const data = await response.json();
+  if (!response.ok || data.status === 'error') {
+    throw new Error(data.message || 'Failed to submit contact');
   }
+  return data;
 }
 
 export async function chatWithAgent(messages: { role: string; content: string }[]) {
