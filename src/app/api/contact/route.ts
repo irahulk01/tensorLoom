@@ -105,8 +105,9 @@ export async function POST(request: NextRequest) {
     });
   } catch (err: any) {
     console.error('Error processing contact submission:', err);
+    const errorMessage = err instanceof Error ? err.message : String(err);
     return NextResponse.json(
-      { status: 'error', message: 'Unable to process contact submission.', error: err.message },
+      { status: 'error', message: 'Unable to process contact submission.', error: errorMessage },
       { status: 500 },
     );
   }
