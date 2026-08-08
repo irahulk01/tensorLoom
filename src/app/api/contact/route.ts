@@ -90,10 +90,12 @@ export async function POST(request: NextRequest) {
 
     const result = await contactsCollection.insertOne(contactDocument);
 
-    // Send email notification via Nodemailer asynchronously in background
-    sendContactEmailNotification(contactDocument).catch((err) =>
-      console.warn('Background mailer error:', err),
-    );
+    // Send email notification via Nodemailer
+    try {
+      await sendContactEmailNotification(contactDocument);
+    } catch (mailErr) {
+      console.error('Contact email notification failed:', mailErr);
+    }
 
     return NextResponse.json({
       status: 'success',
