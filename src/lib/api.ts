@@ -142,11 +142,7 @@ const contentFallback: Record<string, any> = {
 };
 
 const getApiBase = () => {
-  if (typeof window !== 'undefined') {
-    const hostname = window.location.hostname;
-    return `http://${hostname}:3001`;
-  }
-  return 'http://localhost:3001';
+  return '';
 };
 
 export async function fetchContent(lang: string) {
