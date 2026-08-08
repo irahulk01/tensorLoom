@@ -1,92 +1,80 @@
 export function Footer() {
   return (
-    <footer className="relative w-full overflow-hidden bg-[#0A0A0A] pt-20 pb-12 font-sans">
-      <div className="relative z-10 max-w-7xl mx-auto px-8 md:px-16 flex flex-col md:flex-row justify-between mb-40">
-        {/* Left Side: Brand and Copyright */}
-        <div className="flex flex-col mb-12 md:mb-0">
-          <div className="flex items-center gap-3 mb-6">
+    <footer className="relative w-full overflow-hidden bg-[#fcfbf9] pt-16 pb-12 font-sans border-t border-[#c99b3e]/20">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-8 md:px-16 flex flex-col md:flex-row justify-between mb-24 md:mb-32">
+        {/* Brand & Copyright */}
+        <div className="flex flex-col mb-10 md:mb-0">
+          <div className="flex items-center gap-3 mb-4">
             <img
               src="/logo.jpg"
               alt="tensorLoom Logo"
-              className="w-8 h-8 rounded-md object-cover"
+              className="w-7 h-7 rounded-md object-cover shadow-xs"
             />
-            <span className="text-xl font-semibold tracking-tight text-white">tensorLoom</span>
+            <span className="text-xl font-extrabold tracking-tight text-[#0f1117] font-heading">
+              tensorLoom
+            </span>
           </div>
-          <p className="text-sm text-zinc-500">© copyright tensorLoom 2026. All rights reserved.</p>
+          <p className="text-xs sm:text-sm text-[#4a4d57]">
+            © copyright tensorLoom 2026. All rights reserved.
+          </p>
         </div>
 
-        {/* Right Side: Links Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-x-12 gap-y-10 text-sm">
-          {/* Column 1: Pages */}
-          <div className="flex flex-col gap-4">
-            <h4 className="font-semibold text-white mb-2">Pages</h4>
-            <a href="#" className="text-zinc-400 hover:text-white transition-colors">
-              All Products
+        {/* Links Grid */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 text-xs sm:text-sm">
+          <div className="flex flex-col gap-3">
+            <h4 className="font-bold text-[#0f1117] mb-1 font-heading">Pages</h4>
+            <a href="#services" className="text-[#4a4d57] hover:text-[#c99b3e] transition-colors">
+              Capabilities
             </a>
-            <a href="#" className="text-zinc-400 hover:text-white transition-colors">
-              Studio
+            <a href="#work" className="text-[#4a4d57] hover:text-[#c99b3e] transition-colors">
+              Our Work
             </a>
-            <a href="#" className="text-zinc-400 hover:text-white transition-colors">
-              Clients
+            <a href="#tech-stack" className="text-[#4a4d57] hover:text-[#c99b3e] transition-colors">
+              Tech Stack
             </a>
-            <a href="#" className="text-zinc-400 hover:text-white transition-colors">
-              Pricing
-            </a>
-            <a href="#" className="text-zinc-400 hover:text-white transition-colors">
+            <a href="/blog" className="text-[#4a4d57] hover:text-[#c99b3e] transition-colors">
               Blog
             </a>
           </div>
 
-          {/* Column 2: Socials */}
-          <div className="flex flex-col gap-4">
-            <h4 className="font-semibold text-white mb-2">Socials</h4>
-            <a href="#" className="text-zinc-400 hover:text-white transition-colors">
-              Facebook
-            </a>
-            <a href="#" className="text-zinc-400 hover:text-white transition-colors">
-              Instagram
-            </a>
-            <a href="#" className="text-zinc-400 hover:text-white transition-colors">
+          <div className="flex flex-col gap-3">
+            <h4 className="font-bold text-[#0f1117] mb-1 font-heading">Socials</h4>
+            <a href="#" className="text-[#4a4d57] hover:text-[#c99b3e] transition-colors">
               Twitter
             </a>
-            <a href="#" className="text-zinc-400 hover:text-white transition-colors">
+            <a href="#" className="text-[#4a4d57] hover:text-[#c99b3e] transition-colors">
               LinkedIn
             </a>
+            <a href="#" className="text-[#4a4d57] hover:text-[#c99b3e] transition-colors">
+              GitHub
+            </a>
           </div>
 
-          {/* Column 3: Legal */}
-          <div className="flex flex-col gap-4">
-            <h4 className="font-semibold text-white mb-2">Legal</h4>
-            <a href="#" className="text-zinc-400 hover:text-white transition-colors">
+          <div className="flex flex-col gap-3">
+            <h4 className="font-bold text-[#0f1117] mb-1 font-heading">Legal</h4>
+            <a href="#" className="text-[#4a4d57] hover:text-[#c99b3e] transition-colors">
               Privacy Policy
             </a>
-            <a href="#" className="text-zinc-400 hover:text-white transition-colors">
+            <a href="#" className="text-[#4a4d57] hover:text-[#c99b3e] transition-colors">
               Terms of Service
-            </a>
-            <a href="#" className="text-zinc-400 hover:text-white transition-colors">
-              Cookie Policy
             </a>
           </div>
 
-          {/* Column 4: Register */}
-          <div className="flex flex-col gap-4">
-            <h4 className="font-semibold text-white mb-2">Register</h4>
-            <a href="#" className="text-zinc-400 hover:text-white transition-colors">
-              Sign Up
+          <div className="flex flex-col gap-3">
+            <h4 className="font-bold text-[#0f1117] mb-1 font-heading">Contact</h4>
+            <a href="#contact" className="text-[#4a4d57] hover:text-[#c99b3e] transition-colors">
+              Initiate Project
             </a>
-            <a href="#" className="text-zinc-400 hover:text-white transition-colors">
-              Login
-            </a>
-            <a href="#" className="text-zinc-400 hover:text-white transition-colors">
-              Forgot Password
-            </a>
+            <span className="text-[#b38730] font-mono text-xs font-semibold">
+              hello@tensorloom.com
+            </span>
           </div>
         </div>
       </div>
 
-      {/* Massive Background Text */}
+      {/* Massive Background Text Watermark */}
       <div className="absolute bottom-[-10%] left-0 w-full flex justify-center items-end pointer-events-none z-0 overflow-hidden select-none">
-        <h1 className="text-[20vw] font-black text-white/[0.03] leading-none tracking-tighter whitespace-nowrap">
+        <h1 className="text-[18vw] font-black text-[#c99b3e]/[0.05] leading-none tracking-tight whitespace-nowrap font-heading">
           tensorLoom
         </h1>
       </div>

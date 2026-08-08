@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Plus_Jakarta_Sans, Inter, JetBrains_Mono } from 'next/font/google';
 import '@/styles/globals.css';
 import { LenisProvider } from '@/providers/LenisProvider';
+import { ThemeProvider } from '@/context/ThemeContext';
 
 const headingFont = Plus_Jakarta_Sans({
   variable: '--font-heading',
@@ -37,7 +38,9 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body suppressHydrationWarning>
-        <LenisProvider>{children}</LenisProvider>
+        <ThemeProvider>
+          <LenisProvider>{children}</LenisProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
