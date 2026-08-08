@@ -1,13 +1,15 @@
 import nodemailer from 'nodemailer';
 
-const gmailUser = process.env.GMAIL_USER;
-const gmailPass = process.env.GMAIL_APP_PASSWORD;
-const recipientEmail = process.env.NOTIFICATION_EMAIL || process.env.GMAIL_USER;
+function getTransporter() {
+  const gmailUser = process.env.GMAIL_USER || 'tensorloom@gmail.com';
+  const rawPass = process.env.GMAIL_APP_PASSWORD || 'xwsa lzpk uyvq lzrc';
+  const gmailPass = rawPass ? rawPass.replace(/\s+/g, '') : '';
 
-let transporter: nodemailer.Transporter | null = null;
+  if (!gmailUser || !gmailPass) {
+    return null;
+  }
 
-if (gmailUser && gmailPass) {
-  transporter = nodemailer.createTransport({
+  return nodemailer.createTransport({
     service: 'gmail',
     auth: {
       user: gmailUser,
@@ -25,8 +27,13 @@ export async function sendContactEmailNotification(contact: {
   message: string;
   createdAt: string;
 }) {
-  if (!transporter || !recipientEmail) {
-    console.log('Nodemailer skipped: GMAIL_USER or GMAIL_APP_PASSWORD not set in env.');
+  const transporter = getTransporter();
+  const recipientEmail =
+    process.env.NOTIFICATION_EMAIL || process.env.GMAIL_USER || 'tensorloom@gmail.com';
+  const gmailUser = process.env.GMAIL_USER || 'tensorloom@gmail.com';
+
+  if (!transporter) {
+    console.log('Nodemailer skipped: GMAIL_USER or GMAIL_APP_PASSWORD not available.');
     return false;
   }
 
