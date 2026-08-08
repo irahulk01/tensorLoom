@@ -44,7 +44,7 @@ export default function Home() {
   }, [currentLang]);
 
   return (
-    <div className="min-h-screen bg-[var(--background)] text-[var(--foreground)] selection:bg-white/20 selection:text-black relative">
+    <div className="min-h-screen bg-[var(--background)] text-[var(--foreground)] selection:bg-sky-500/20 selection:text-slate-900 relative">
       {!curtainFinished && <CurtainLoader onComplete={() => setCurtainFinished(true)} />}
 
       {content && (

@@ -5,14 +5,13 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { ArrowRight, Sparkles } from 'lucide-react';
 
-// Brand SVGs & 3D styling for main grid
 const mainTechnologies = [
   {
     name: 'React 19',
     category: 'Frontend',
     description: 'Concurrent rendering, Server Components, and compiler optimizations.',
-    color: '#61DAFB',
-    glow: 'rgba(97, 218, 251, 0.25)',
+    color: '#c99b3e',
+    glow: 'rgba(201, 155, 62, 0.15)',
     svg: (
       <svg
         className="w-7 h-7"
@@ -20,8 +19,8 @@ const mainTechnologies = [
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <circle cx="0" cy="0" r="2.05" fill="#61DAFB" />
-        <g stroke="#61DAFB" strokeWidth="1" fill="none">
+        <circle cx="0" cy="0" r="2.05" fill="#c99b3e" />
+        <g stroke="#c99b3e" strokeWidth="1" fill="none">
           <ellipse rx="11" ry="4.2" />
           <ellipse rx="11" ry="4.2" transform="rotate(60)" />
           <ellipse rx="11" ry="4.2" transform="rotate(120)" />
@@ -33,10 +32,15 @@ const mainTechnologies = [
     name: 'Next.js 15',
     category: 'Framework',
     description: 'Turbopack compilation, App Router, and edge server streaming.',
-    color: '#ffffff',
-    glow: 'rgba(255, 255, 255, 0.25)',
+    color: '#0f1117',
+    glow: 'rgba(15, 17, 23, 0.15)',
     svg: (
-      <svg className="w-7 h-7" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg
+        className="w-7 h-7 text-[#0f1117]"
+        viewBox="0 0 180 180"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
         <mask id="mask0" maskUnits="userSpaceOnUse" x="0" y="0" width="180" height="180">
           <circle cx="90" cy="90" r="90" fill="#000" />
         </mask>
@@ -64,8 +68,8 @@ const mainTechnologies = [
             id="nextGradient2"
             x1="121"
             y1="54"
-            x2="120.799"
-            y2="106.875"
+            x2="121"
+            y2="126"
             gradientUnits="userSpaceOnUse"
           >
             <stop stopColor="white" />
@@ -78,202 +82,131 @@ const mainTechnologies = [
   {
     name: 'TypeScript',
     category: 'Language',
-    description: 'Strict type safety and robust refactoring for enterprise codebases.',
-    color: '#3178C6',
-    glow: 'rgba(49, 120, 198, 0.25)',
+    description: 'Strict typing for zero runtime surprises and type-safe APIs.',
+    color: '#b38730',
+    glow: 'rgba(179, 135, 48, 0.15)',
     svg: (
-      <svg
-        className="w-7 h-7 rounded-md"
-        viewBox="0 0 100 100"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <rect width="100" height="100" rx="20" fill="#3178C6" />
+      <svg className="w-7 h-7" viewBox="0 0 128 128" fill="none">
+        <rect width="128" height="128" rx="20" fill="#b38730" />
         <path
-          d="M62.5 68.3C64.6 70.2 67.8 71.4 71.3 71.4C76 71.4 78.5 69.1 78.5 65.6C78.5 62.4 76.5 60.7 70.8 58.7L68.2 57.8C61.4 55.4 57.6 51.5 57.6 44.9C57.6 37.3 64.2 32 74.3 32C79 32 83.1 33.3 86.1 35.5L82.6 44C80 42.4 77.2 41.4 74.1 41.4C70 41.4 67.7 43.3 67.7 46.2C67.7 49.3 69.5 50.7 75.3 52.8L77.9 53.7C85.5 56.4 88.8 60.5 88.8 66.8C88.8 75.5 81.3 81 70.7 81C65.2 81 60 79.2 56.4 76.2L62.5 68.3ZM36.1 41.7H48.4V80H37.8V41.7H25.3V32.8H48.7V41.7H36.1Z"
+          d="M75.2 60.8V49.6H107.2V60.8H96.8V108.8H85.6V60.8H75.2ZM53.3 90.7C55.6 90.7 57.7 90.2 59.8 89.2C61.9 88.2 63.6 86.8 64.9 85.1L72.8 91.5C70.6 94.6 67.7 97.1 64.1 98.9C60.5 100.7 56.4 101.6 51.9 101.6C46.8 101.6 42.4 100.5 38.6 98.2C34.9 95.9 31.9 92.7 29.8 88.6C27.7 84.5 26.6 79.7 26.6 74.3C26.6 68.9 27.7 64.2 29.8 60.1C32 56 35 52.8 38.8 50.5C42.7 48.2 47.1 47.1 52.2 47.1C56.6 47.1 60.5 48 64 49.8C67.5 51.6 70.3 54.1 72.4 57.2L64.5 63.6C63.2 61.8 61.6 60.4 59.7 59.4C57.7 58.4 55.6 57.9 53.3 57.9C49.9 57.9 47 58.7 44.5 60.4C42 62.1 40.1 64.4 38.8 67.4C37.5 70.4 36.8 73.7 36.8 77.4C36.8 81.1 37.5 84.4 38.8 87.4C40.1 90.4 42 92.7 44.5 94.4C47 96.1 49.9 96.9 53.3 96.9V90.7Z"
           fill="white"
         />
       </svg>
     ),
   },
   {
-    name: 'Node.js',
-    category: 'Backend',
-    description: 'High-throughput async event loops and microservices execution.',
-    color: '#5FA04E',
-    glow: 'rgba(95, 160, 78, 0.25)',
+    name: 'Golang',
+    category: 'Backend Engine',
+    description: 'High-concurrency microservices, gRPC protocols, and low memory overhead.',
+    color: '#0f1117',
+    glow: 'rgba(15, 17, 23, 0.15)',
     svg: (
-      <svg className="w-7 h-7" viewBox="0 0 256 270" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M128 0L8 69.3V200.7L128 270L248 200.7V69.3L128 0Z" fill="#5FA04E" />
-        <path
-          d="M128 139.5L180.5 109.2V169.8L128 200.1L75.5 169.8V109.2L128 139.5Z"
-          fill="#ffffff"
-          fillOpacity="0.85"
-        />
+      <svg className="w-7 h-7 text-[#0f1117]" viewBox="0 0 100 100" fill="currentColor">
+        <path d="M78.8 32.5c-1.3-1.6-3.1-2.9-5.1-3.6-2.9-1-6.1-1.1-9.1-.5-2.2.4-4.3 1.3-6.2 2.5-3.3 2.1-5.9 5.2-7.4 8.8-1.5 3.6-1.9 7.6-1.1 11.4.8 3.8 2.7 7.2 5.5 9.8 2.8 2.6 6.3 4.3 10.1 4.8 3.8.5 7.7-.1 11.2-1.7 3.5-1.6 6.4-4.2 8.3-7.5.5-.9.9-1.9 1.2-2.9h-18.4v-6.9h26.4c.1 1.1.2 2.2.1 3.3-.2 4.1-1.6 8.1-4 11.4-2.4 3.3-5.7 5.9-9.5 7.5-3.8 1.6-8 2.1-12.1 1.6-4.1-.5-8-2.2-11.2-4.8-3.2-2.6-5.6-6-7-9.8-1.4-3.8-1.7-8-.9-12.1.8-4.1 2.6-7.9 5.4-11 2.8-3.1 6.4-5.4 10.4-6.6 4-1.2 8.3-1.3 12.4-.3 3.6.9 7 2.6 9.8 5.1l-6.2 5.5z" />
       </svg>
     ),
   },
   {
     name: 'PostgreSQL',
-    category: 'Database',
-    description: 'Relational integrity, JSONB document querying, and vector embeddings.',
-    color: '#4169E1',
-    glow: 'rgba(65, 105, 225, 0.25)',
+    category: 'Relational DB',
+    description: 'ACID transaction reliability, JSONB indexing, and geospatial extensions.',
+    color: '#b38730',
+    glow: 'rgba(179, 135, 48, 0.15)',
     svg: (
-      <svg className="w-7 h-7" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg className="w-7 h-7" viewBox="0 0 128 128">
         <path
-          d="M50 5C25.1 5 5 25.1 5 50C5 74.9 25.1 95 50 95C74.9 95 95 74.9 95 50C95 25.1 74.9 5 50 5ZM68 45C66 45 64 46 63 47.5C61 44 57 42 52 42C45 42 40 48 40 56C40 64 45 70 52 70C57 70 61 68 63 64.5C64 66 66 67 68 67C71 67 74 65 74 61C74 57 71 55 68 55C66 55 64.5 55.5 63.5 56.5C62.5 52.5 58.5 49 53 49C48.5 49 45 52.5 45 57C45 61.5 48.5 65 53 65C56 65 58.5 63.5 60 61C60.5 62 61.5 63 63 63C64.5 63 66 62 66 60.5C66 59 64.5 58 63 58"
-          fill="#4169E1"
+          d="M64 12C35.3 12 12 35.3 12 64s23.3 52 52 52 52-23.3 52-52S92.7 12 64 12zm22.8 62.4c-1.8 4.2-4.8 7.8-8.6 10.4-3.8 2.6-8.3 4-13 4.1-3.6.1-7.2-.8-10.4-2.5-3.2-1.7-5.9-4.2-7.8-7.3-1.9-3.1-2.9-6.7-2.9-10.4 0-4.8 1.7-9.4 4.8-13 3.1-3.6 7.4-6 12.2-6.8 1.5-.3 3-.4 4.6-.4 4.5 0 8.9 1.4 12.5 4.1 3.6 2.7 6.2 6.5 7.4 10.9.3 1 .4 2 .4 3 0 2.9-.8 5.7-2.2 8.1z"
+          fill="#b38730"
         />
       </svg>
     ),
   },
   {
-    name: 'Docker',
-    category: 'Infrastructure',
-    description: 'Immutable containerized deployments and multi-arch image builds.',
-    color: '#2496ED',
-    glow: 'rgba(36, 150, 237, 0.25)',
+    name: 'Docker & K8s',
+    category: 'Container Orchestration',
+    description: 'Declarative container builds, auto-healing clusters, and zero-downtime deploys.',
+    color: '#c99b3e',
+    glow: 'rgba(201, 155, 62, 0.15)',
     svg: (
-      <svg className="w-7 h-7" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path
-          d="M13 3h2v2h-2V3zm-3 0h2v2h-2V3zM7 3h2v2H7V3zm6 3h2v2h-2V6zm-3 0h2v2h-2V6zm-3 0h2v2H7V6zm-3 0h2v2H4V6zm9 3h2v2h-2V9zm-3 0h2v2h-2V9zm-3 0h2v2H7V9zm-3 0h2v2H4V9zm-3 0h2v2H1V9zm22.5 3.5c-.5-.4-1.6-.5-2.5-.2-.3-.6-.8-1.1-1.4-1.3l-.6-.2-.4.5c-.7.9-1.8 1.4-3 1.4H1c-.3 0-.6.2-.7.5C.1 13.7 0 14.8 0 16c0 4.4 3.6 8 8 8 4.2 0 7.7-3.3 8-7.5 1.5 0 3-1 3.5-2.2.3.1.6.2.9.2 1.1 0 2.1-.5 2.1-1z"
-          fill="#2496ED"
-        />
-      </svg>
-    ),
-  },
-  {
-    name: 'TailwindCSS',
-    category: 'Styling',
-    description: 'Utility-first CSS architecture with zero-runtime performance.',
-    color: '#06B6D4',
-    glow: 'rgba(6, 182, 212, 0.25)',
-    svg: (
-      <svg className="w-7 h-7" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path
-          d="M12.001 4.8c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624C13.666 10.618 15.027 12 18.001 12c3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C16.336 6.182 14.975 4.8 12.001 4.8zm-6 7.2c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624C7.666 17.818 9.027 19.2 12.001 19.2c3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C10.336 13.382 8.975 12 6.001 12z"
-          fill="#06B6D4"
-        />
-      </svg>
-    ),
-  },
-  {
-    name: 'Framer Motion',
-    category: 'Motion',
-    description: 'Spring-based physics animations and layout transformations.',
-    color: '#F0047F',
-    glow: 'rgba(240, 4, 127, 0.25)',
-    svg: (
-      <svg className="w-7 h-7" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M4 0h16v8h-8zM4 8h8l8 8H4zM4 16h8v8z" fill="#F0047F" />
+      <svg className="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="#c99b3e" strokeWidth="2">
+        <path d="M22 12.5c0 5.523-4.477 10-10 10S2 18.023 2 12.5 6.477 2.5 12 2.5s10 4.477 10 10z" />
+        <path d="M12 6v12M6 12h12" />
       </svg>
     ),
   },
 ];
 
-export function TechStack() {
-  const containerRef = useRef<HTMLDivElement>(null);
+interface TechStackProps {
+  techContent?: any;
+}
+
+export function TechStack({ techContent }: TechStackProps) {
+  const container = useRef<HTMLDivElement>(null);
 
   return (
     <section
       id="tech-stack"
-      ref={containerRef}
-      className="w-full bg-[var(--background)] py-16 sm:py-24 md:py-36 relative z-20 border-t border-white/10"
+      ref={container}
+      className="w-full py-24 md:py-36 bg-[#fcfbf9] relative z-20 overflow-hidden"
     >
-      <div className="max-w-[1200px] mx-auto px-4 sm:px-6 md:px-12">
-        {/* Header */}
-        <div className="mb-10 sm:mb-16 flex flex-col md:flex-row md:items-end md:justify-between gap-4 sm:gap-6">
+      <div className="max-w-[1200px] mx-auto px-6 md:px-12 relative z-10">
+        <div className="mb-14 flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-[#c99b3e]/20 pb-10">
           <div>
-            <span className="text-xs font-mono text-cyan-400 uppercase tracking-widest mb-3 block font-semibold">
-              Architecture & Stack
+            <span className="text-xs font-mono text-[#b38730] font-semibold uppercase tracking-widest mb-2 block">
+              ENGINEERING ECOSYSTEM
             </span>
-            <h2 className="text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tighter text-white leading-tight max-w-3xl font-heading">
-              Engineered for performance, built on robust standards.
+            <h2 className="text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-[#0f1117] font-heading">
+              OUR TECH STACK
             </h2>
           </div>
-
-          <Link
-            href="/stack"
-            className="flex items-center gap-2 px-5 py-2.5 sm:px-6 sm:py-3 rounded-full bg-cyan-500 hover:bg-cyan-400 text-black font-extrabold text-xs transition-all duration-300 shadow-[0_0_20px_rgba(6,182,212,0.3)] cursor-pointer font-heading w-fit shrink-0"
-          >
-            <span>Explore Full Stack</span>
-            <ArrowRight className="w-4 h-4" />
-          </Link>
+          <p className="text-base md:text-lg text-[#4a4d57] font-normal max-w-md font-sans">
+            Battletested frameworks and cloud infrastructure built for speed, resilience, and scale.
+          </p>
         </div>
 
-        {/* Responsive Grid/Carousel Container: Carousel starts cleanly at Card 1 (React 19) */}
-        <div className="flex md:grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 max-md:overflow-x-auto max-md:no-scrollbar max-md:snap-x max-md:snap-mandatory max-md:pb-4 max-md:pt-1 max-md:px-2">
+        {/* Tech Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
           {mainTechnologies.map((tech, idx) => (
             <motion.div
-              key={idx}
-              whileHover={{ y: -4, scale: 1.01 }}
-              transition={{ duration: 0.3 }}
-              className="group flagship-surface p-6 sm:p-8 rounded-2xl hover:border-cyan-500/40 transition-all duration-300 min-h-[200px] sm:min-h-[220px] max-md:w-[84vw] max-md:shrink-0 max-md:snap-start flex flex-col justify-between border border-white/10 shadow-lg hover:shadow-2xl relative overflow-hidden [perspective:800px]"
+              key={tech.name}
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: idx * 0.08 }}
+              whileHover={{ y: -4 }}
+              className="p-6 sm:p-8 rounded-3xl bg-white border border-[#c99b3e]/20 shadow-sm hover:shadow-lg hover:border-[#c99b3e]/50 transition-all duration-300 flex flex-col justify-between group relative overflow-hidden"
             >
-              {/* Subtle accent glow behind icon */}
-              <div
-                className="absolute -top-12 -right-12 w-32 h-32 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-2xl pointer-events-none"
-                style={{ background: tech.glow }}
-              />
-
-              {/* Category & 3D Badge Icon */}
-              <div className="flex items-center justify-between w-full relative z-10">
-                <span className="text-[11px] sm:text-xs font-mono text-gray-400 uppercase tracking-widest">
-                  {tech.category}
-                </span>
-
-                {/* 3D Elevated Badge */}
-                <div
-                  className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl flex items-center justify-center border border-white/15 bg-white/5 shadow-sm transition-transform duration-500 group-hover:rotate-6 group-hover:scale-110"
-                  style={{
-                    boxShadow: `0 10px 25px -5px ${tech.glow}`,
-                  }}
-                >
-                  {tech.svg}
+              <div>
+                <div className="flex items-center justify-between gap-3 mb-6">
+                  <div className="p-3 rounded-2xl bg-[#c99b3e]/10 border border-[#c99b3e]/25">
+                    {tech.svg}
+                  </div>
+                  <span className="text-[10px] font-mono text-[#b38730] bg-[#c99b3e]/10 px-3 py-1 rounded-full border border-[#c99b3e]/25 font-semibold">
+                    {tech.category}
+                  </span>
                 </div>
-              </div>
 
-              {/* Name & Description */}
-              <div className="mt-4 sm:mt-6 relative z-10">
-                <h3 className="text-lg sm:text-xl font-bold text-white mb-1.5 sm:mb-2 group-hover:text-cyan-400 transition-colors font-heading">
+                <h3 className="text-xl sm:text-2xl font-extrabold tracking-tight text-[#0f1117] mb-2 font-heading group-hover:text-[#b38730] transition-colors">
                   {tech.name}
                 </h3>
-                <p className="text-xs sm:text-sm text-gray-400 font-sans leading-relaxed">
+                <p className="text-xs sm:text-sm text-[#4a4d57] font-sans leading-relaxed">
                   {tech.description}
                 </p>
               </div>
             </motion.div>
           ))}
+        </div>
 
-          {/* 9th "See More" Link Card */}
-          <Link href="/stack" className="max-md:w-[84vw] max-md:shrink-0 max-md:snap-start">
-            <motion.div
-              whileHover={{ y: -4, scale: 1.01 }}
-              transition={{ duration: 0.3 }}
-              className="group cursor-pointer p-6 sm:p-8 rounded-2xl border border-dashed border-cyan-500/40 bg-cyan-500/5 hover:bg-cyan-500/10 transition-all duration-300 min-h-[200px] sm:min-h-[220px] flex flex-col justify-between relative overflow-hidden shadow-lg h-full"
-            >
-              <div className="flex items-center justify-between w-full">
-                <span className="text-[11px] sm:text-xs font-mono text-cyan-400 uppercase tracking-widest font-semibold flex items-center gap-1.5">
-                  <Sparkles className="w-3.5 h-3.5" />
-                  <span>Ecosystem</span>
-                </span>
-                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-cyan-500 text-black flex items-center justify-center shadow-[0_0_20px_rgba(6,182,212,0.4)] group-hover:scale-110 transition-transform">
-                  <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
-                </div>
-              </div>
-
-              <div className="mt-4 sm:mt-6">
-                <h3 className="text-lg sm:text-xl font-bold text-white mb-1.5 sm:mb-2 group-hover:text-cyan-300 transition-colors font-heading flex items-center gap-2">
-                  <span>View Full Stack</span>
-                  <span className="text-cyan-400">→</span>
-                </h3>
-                <p className="text-xs sm:text-sm text-gray-400 font-sans leading-relaxed">
-                  Explore our complete technology stack including Cloud Infrastructure, AI Engines,
-                  & Databases.
-                </p>
-              </div>
-            </motion.div>
+        {/* CTA to Full Architecture Directory */}
+        <div className="flex justify-center">
+          <Link
+            href="/stack"
+            className="group px-8 py-4 bg-[#0f1117] text-white rounded-full font-bold text-sm sm:text-base flex items-center gap-3 hover:bg-[#c99b3e] hover:text-slate-950 transition-all cursor-pointer shadow-md hover:shadow-xl"
+          >
+            <Sparkles className="w-4 h-4 text-[#c99b3e] group-hover:text-slate-950" />
+            <span>Explore Full Architecture Directory</span>
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </Link>
         </div>
       </div>
